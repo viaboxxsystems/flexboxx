@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>de.viaboxx</groupId>
+    <artifactId>filterboxx</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Filterboxx</name>
+
+	<modules>
+        <module>swf</module>
+        <module>air</module>
+    </modules>
+
+    <properties>
+        <flex-version>4.1.0.16248</flex-version>
+        <flexmojos-version>4.0-beta-3</flexmojos-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <debug-flex>false</debug-flex>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>debug-flex</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <debug-flex>true</debug-flex>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <sourceDirectory>src/main/flex</sourceDirectory>
+        <testSourceDirectory>src/test/flex</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.flexmojos</groupId>
+                <artifactId>flexmojos-maven-plugin</artifactId>
+                <version>${flexmojos-version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <debug>${debug-flex}</debug>
+                    <storepass/>
+                    <managers>
+                        <manager>flash.fonts.CFFFontManager</manager>
+                    </managers>
+                    <targetPlayer>10.0.0</targetPlayer>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.adobe.flex</groupId>
+                        <artifactId>compiler</artifactId>
+                        <version>${flex-version}</version>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.adobe.flex.framework</groupId>
+                <artifactId>flex-framework</artifactId>
+                <version>${flex-version}</version>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>com.adobe.flexunit</groupId>
+                <artifactId>flexunit</artifactId>
+                <version>4.1.0-beta3</version>
+                <type>swc</type>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>hamcrest-as3</groupId>
+                <artifactId>hamcrest-as3</artifactId>
+                <version>1.1.0</version>
+                <type>swc</type>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

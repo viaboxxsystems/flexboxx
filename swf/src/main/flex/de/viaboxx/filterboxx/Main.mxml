@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication
+        xmlns:fx="http://ns.adobe.com/mxml/2009"
+        xmlns:s="library://ns.adobe.com/flex/spark"
+        xmlns:mx="library://ns.adobe.com/flex/mx"
+        showStatusBar="true"
+        width="800"
+        height="600"
+        backgroundColor="#EDEDED"
+        >
+    <fx:Script>
+    <![CDATA[
+
+        [Embed(source="../../../../resources/FuturaMediumBT.ttf",
+                fontName="FuturaEmbed",
+                fontStyle="normal",
+                fontWeight="normal",
+                mimeType="application/x-font",
+                embedAsCFF="true")]
+        private const Futura:Class;
+
+        [Embed(source="../../../../resources/FuturaMediumItalicBT.ttf",
+                fontName="FuturaEmbed",
+                fontStyle="italic",
+                fontWeight="normal",
+                mimeType="application/x-font",
+                embedAsCFF="true")]
+        private const FuturaItalic:Class;
+
+        [Embed(source="../../../../resources/FuturaBoldBT.ttf",
+                fontName="FuturaEmbed",
+                fontStyle="normal",
+                fontWeight="bold",
+                mimeType="application/x-font",
+                embedAsCFF="true")]
+        private const FuturaBold:Class;
+
+        [Embed(source="../../../../resources/FuturaBoldItalicBT.ttf",
+                fontName="FuturaEmbed",
+                fontStyle="italic",
+                fontWeight="bold",
+                mimeType="application/x-font",
+                embedAsCFF="true")]
+        private const FuturaItalicBold:Class;
+        ]]>
+        </fx:Script>
+
+
+    
+
+
+</s:WindowedApplication>
