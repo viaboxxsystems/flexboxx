@@ -10,6 +10,7 @@ public class FilterDescription {
     public var filter:IBitmapFilter;
     private const propertiesByName:Dictionary = new Dictionary();
 
+    public var className:String;
 
     public function FilterDescription() {
     }
@@ -36,12 +37,21 @@ public class FilterDescription {
                 propertyName:String,
                 typeName:String,
                 property:FilterProperty,
-                inspectable:XML;
+                inspectable:XML,
+                filterType:String;
+
         const description:XML = describeType(filter);
         this.filter = filter;
+        filterType = description.@name.toString();
+        if (filterType.lastIndexOf(":") != -1) {
+            className = filterType.substr(filterType.lastIndexOf(":")+1);
+        } else {
+            className = filterType;
+        }
         for each (accessor in description.accessor) {
             propertyName = accessor.@name.toString();
             typeName = accessor.@type.toString();
+
             property = new FilterProperty(propertyName, getDefinitionByName(typeName) as Class);
             for each(inspectable in accessor.metadata.(@name == "Inspectable")) {
                 if (inspectable) {
@@ -66,10 +76,11 @@ public class FilterDescription {
     public function forEachProperty(callForEachProperty:Function):void {
         // TODO fhd: Inefficient!
         var sortedProperties:Array = new Array();
-        for each (var property:FilterProperty in propertiesByName) {
+        var property:FilterProperty;
+        for each (property in propertiesByName) {
             sortedProperties.push(property);
         }
-        sortedProperties.sort(function(a, b):int {
+        sortedProperties.sort(function(a:FilterProperty, b:FilterProperty):int {
             if (a.name < b.name) {
                 return -1;
             }
@@ -78,7 +89,7 @@ public class FilterDescription {
             }
             return 0;
         });
-        for each (var property:FilterProperty in sortedProperties) {
+        for each (property in sortedProperties) {
             callForEachProperty(property);
         }
     }

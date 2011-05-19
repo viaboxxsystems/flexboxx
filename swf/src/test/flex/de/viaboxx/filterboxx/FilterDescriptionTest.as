@@ -27,7 +27,6 @@ public class FilterDescriptionTest {
         ];
     }
 
-
     [Test(dataProvider="propertyNames")]
     public function dropShadowDescriptionPropertyNameIsCorrect(propertyName:String):void {
         assertThat(FilterDescription.forFilter(new DropShadowFilter()).getProperty(propertyName).name, equalTo(propertyName));
@@ -40,10 +39,15 @@ public class FilterDescriptionTest {
     }
 
     [Test]
+    public function filterDescriptionContainsRightClassName():void {
+        assertThat(FilterDescription.forFilter(new DropShadowFilter()).className, equalTo("DropShadowFilter"));
+    }
+
+    [Test]
     public function iteratingOverFilterDescriptionsWorks():void {
         var desc:FilterDescription = FilterDescription.forFilter(new TestFilter()),
                 properties:Array = [];
-        desc.forEachProperty(function callme(item:FilterProperty) {
+        desc.forEachProperty(function callme(item:FilterProperty):void {
             properties.push(item.name);
         });
         assertThat(properties, array(equalTo("a"), equalTo("b"), equalTo("c")));
@@ -63,7 +67,6 @@ public class FilterDescriptionTest {
         assertThat(desc.getProperty("a").minValue, equalTo(1));
         assertThat(desc.getProperty("a").maxValue, equalTo(100));
     }
-
 
 }
 }
