@@ -6,7 +6,7 @@ import org.hamcrest.text.startsWith;
 
 import spark.filters.DropShadowFilter;
 
-public class FilterSourceGeneratorTest extends FilterSourceGenerator{
+public class FilterSourceGeneratorTest extends FilterSourceGenerator {
 
     public function FilterSourceGeneratorTest() {
         //empty constructor
@@ -38,6 +38,11 @@ public class FilterSourceGeneratorTest extends FilterSourceGenerator{
     }
 
     [Test]
+    public function generatesGradientEntriesCorrectly():void {
+        assertThat(sourceForFilter(new GradientEntryTestFilter()), equalTo('<s:GradientEntryTestFilter\nentries="{[new GradientEntry(0x000000,0.00,1.00),new GradientEntry(0xFF0000,1.00,0.50)]}"\n/>'));
+    }
+
+    [Test]
     public function namespacePrefixIsCustomizable():void {
         assertThat(sourceForFilter(new IntTestFilter(), "asd"), startsWith("<asd:"));
     }
@@ -48,6 +53,7 @@ public class FilterSourceGeneratorTest extends FilterSourceGenerator{
 import flash.filters.BitmapFilter;
 
 import mx.filters.IBitmapFilter;
+import mx.graphics.GradientEntry;
 
 class IntTestFilter implements IBitmapFilter {
 
@@ -94,6 +100,20 @@ class ColorTestFilter implements IBitmapFilter {
 
     public function get blue():uint {
         return _blue;
+    }
+
+    public function clone():BitmapFilter {
+        return null;
+    }
+}
+
+class GradientEntryTestFilter implements IBitmapFilter {
+
+    private var _entries:Array = [new GradientEntry(0x000000, 0, 1), new GradientEntry(0xff0000, 1, .5)];
+
+    [Inspectable(arrayType="mx.graphics.GradientEntry")]
+    public function get entries():Array {
+        return _entries;
     }
 
     public function clone():BitmapFilter {

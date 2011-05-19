@@ -16,8 +16,8 @@
         import mx.collections.ArrayList;
         import mx.controls.CheckBox;
         import mx.controls.ColorPicker;
+        import mx.controls.sliderClasses.Slider;
         import mx.core.UIComponent;
-        import mx.events.PropertyChangeEvent;
         import mx.graphics.GradientEntry;
         import mx.graphics.LinearGradient;
         import mx.graphics.SolidColor;
@@ -193,6 +193,13 @@
                                 colorChooser.selectedColor = item.color;
                                 BindingUtils.bindProperty(item, "color", colorChooser, "selectedColor");
                                 controlsGroup.addElement(colorChooser);
+                                var alphaSlider:HSlider = new HSlider();
+                                alphaSlider.value = item.alpha;
+                                alphaSlider.minimum = 0;
+                                alphaSlider.maximum = 1;
+                                alphaSlider.stepSize = .01;
+                                BindingUtils.bindProperty(item, "alpha", alphaSlider, "value");
+                                controlsGroup.addElement(alphaSlider);
                                 var removeButton:Button = new Button();
                                 removeButton.label = "-";
                                 removeButton.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void {
@@ -200,6 +207,7 @@
                                         return entry != item;
                                     });
                                     gradientFill.entries = newGradients;
+                                    object[property.name] = gradientFill.entries;
                                     clearControlsGroup();
                                     addControls(newGradients);
                                 });
@@ -226,6 +234,7 @@
                                 return b.ratio - a.ratio;
                             });
                             gradientFill.entries = newGradients;
+                            object[property.name] = gradientFill.entries;
                             clearControlsGroup();
                             addControls(newGradients);
                         });
@@ -302,11 +311,6 @@
                 shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
             }
             addFilterToShape();
-//            shape.addEventListener(PropertyChangeEvent.PROPERTY_CHANGE, function(e:PropertyChangeEvent):void {
-//                if (e.property == "width" || e.property == "height") {
-//                    shape.invalidateSize();
-//                }
-//            });
         }
 
         ]]>

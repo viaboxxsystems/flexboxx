@@ -1,11 +1,17 @@
 package de.viaboxx.filterboxx {
 import mx.filters.IBitmapFilter;
 import mx.formatters.NumberFormatter;
+import mx.graphics.GradientEntry;
+
+import org.hamcrest.collection.array;
 
 public class FilterSourceGenerator {
+    private var formatter:NumberFormatter;
 
     public function FilterSourceGenerator() {
-        //empty constructor
+        formatter = new NumberFormatter();
+        formatter.decimalSeparatorTo = ".";
+        formatter.precision = 2;
     }
 
     public function sourceForFilter(filter:IBitmapFilter, namespacePrefix:String = "s"):String {
@@ -17,18 +23,34 @@ public class FilterSourceGenerator {
                 source += "\n";
                 fistAttribute = false;
             }
-            source += property.name + '="' + format(filter[property.name], property.dataType) + '"\n';
+            source += property.name + '="' + format(filter[property.name], property) + '"\n';
         });
         source += "/>";
         return source;
     }
 
-    private function format(value:*, dataType:Class):String {
+    private function format(value:*, property:FilterProperty):String {
+        const dataType:Class = property.dataType;
         switch (dataType) {
+            case Array:
+                if (property.arrayType == GradientEntry) {
+                    var returnString:String ="{[";
+                    value.forEach(function(item:GradientEntry, index:int, array:Array):void {
+                        returnString +=  "new GradientEntry(";
+                        returnString += formatHex(item.color);
+                        returnString += ",";
+                        returnString += formatter.format(item.ratio);
+                        returnString += ",";
+                        returnString += formatter.format(item.alpha);
+                        returnString +=")";
+                        if(index == array.length -2){
+                            returnString +=",";
+                        }
+                    });
+                }
+                return returnString+"]}";
+                break;
             case Number:
-                var formatter:NumberFormatter = new NumberFormatter();
-                formatter.decimalSeparatorTo = ".";
-                formatter.precision = 2;
                 return formatter.format(value);
             case uint:
                 return formatHex(value);
