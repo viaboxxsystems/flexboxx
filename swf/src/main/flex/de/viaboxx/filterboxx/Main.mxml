@@ -12,18 +12,10 @@
     <fx:Script>
     <![CDATA[
 
-        import mx.binding.utils.BindingUtils;
         import mx.collections.ArrayList;
-        import mx.controls.CheckBox;
-        import mx.controls.ColorPicker;
         import mx.core.UIComponent;
-        import mx.graphics.GradientEntry;
-        import mx.graphics.LinearGradient;
         import mx.graphics.SolidColor;
 
-        import spark.components.HGroup;
-        import spark.components.HSlider;
-        import spark.components.Spinner;
         import spark.filters.BevelFilter;
         import spark.filters.BlurFilter;
         import spark.filters.ColorMatrixFilter;
@@ -35,10 +27,6 @@
         import spark.primitives.Ellipse;
         import spark.primitives.Rect;
         import spark.primitives.supportClasses.FilledElement;
-
-
-
-
 
         [Embed(source="../../../../resources/FuturaMediumBT.ttf",
                 fontName="FuturaEmbed",
@@ -115,152 +103,14 @@
 
         }
 
-        private function createComponentFor(object:*, property:FilterProperty):UIComponent {
-            var group:HGroup = new HGroup();
-            var spinner:Spinner;
-            group.gap = 5;
-            var label:Label = new Label();
-            label.text = property.name;
-            switch (property.dataType) {
-                case Boolean:
-                    var checkbox:CheckBox = new CheckBox();
-                    checkbox.label = property.name;
-                    checkbox.selected = object[property.name];
-                    BindingUtils.bindProperty(object, property.name, checkbox, "selected");
-                    group.addElement(checkbox);
-                    break;
-                case int:
-                //fall-through
-                case Number:
-                    if (property.maxValue) {
-                        var slider:HSlider = new HSlider();
-                        slider.minimum = property.minValue;
-                        slider.maximum = property.maxValue;
-                        slider.stepSize = 0.01;
-                        slider.value = object[property.name];
-                        BindingUtils.bindProperty(object, property.name, slider, "value");
-                        group.addElement(label);
-                        group.addElement(slider);
-                        if (property.maxValue - property.minValue > 100) {
-                            spinner = new Spinner();
-                            spinner.value = slider.value;
-                            BindingUtils.bindProperty(spinner, "value", slider, "value");
-                            BindingUtils.bindProperty(slider, "value", spinner, "value");
-                            group.addElement(spinner);
-                        }
-                    } else {
-                        spinner = new Spinner();
-                        spinner.stepSize = 1;
-                        spinner.value = object[property.name];
-                        var valueLabel:Label = new Label();
-                        valueLabel.text = object[property.name];
-                        BindingUtils.bindProperty(object, property.name, spinner, "value");
-                        BindingUtils.bindProperty(valueLabel, "text", spinner, "value");
-                        group.addElement(label);
-                        group.addElement(valueLabel);
-                        group.addElement(spinner);
-                    }
-                    break;
-                case uint:
-                    var colorPicker:ColorPicker = new ColorPicker();
-                    colorPicker.selectedColor = object[property.name];
-                    BindingUtils.bindProperty(object, property.name, colorPicker, "selectedColor");
-                    group.addElement(label);
-                    group.addElement(colorPicker);
-                    break;
-                case Array:
-                    if (property.arrayType == GradientEntry) {
-                        var overviewRect:Rect = new Rect();
-                        overviewRect.width = 100;
-                        overviewRect.height = 10;
-
-                        var gradientFill:LinearGradient = new LinearGradient();
-                        gradientFill.entries = [];
-                        overviewRect.fill = gradientFill;
-                        group.addElement(overviewRect);
-
-                        var addGradientEntryButton:Button = new Button();
-                        addGradientEntryButton.label = "+";
-                        var controlsGroup:VGroup = new VGroup();
-                        group.addElement(controlsGroup);
-
-                        function clearControlsGroup():void {
-                            controlsGroup.removeAllElements();
-                        }
-
-                        function addControls(entries:Array):void {
-                            entries.forEach(function(item:GradientEntry, index:int, array:Array):void {
-                                var label:Label = new Label();
-                                label.text = "Entry:";
-                                controlsGroup.addElement(label);
-                                var colorChooser:ColorPicker = new ColorPicker();
-                                colorChooser.selectedColor = item.color;
-                                BindingUtils.bindProperty(item, "color", colorChooser, "selectedColor");
-                                controlsGroup.addElement(colorChooser);
-                                var alphaSlider:HSlider = new HSlider();
-                                alphaSlider.value = item.alpha;
-                                alphaSlider.minimum = 0;
-                                alphaSlider.maximum = 1;
-                                alphaSlider.stepSize = .01;
-                                BindingUtils.bindProperty(item, "alpha", alphaSlider, "value");
-                                controlsGroup.addElement(alphaSlider);
-                                var removeButton:Button = new Button();
-                                removeButton.label = "-";
-                                removeButton.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void {
-                                    var newGradients:Array = gradientFill.entries.filter(function(entry:GradientEntry, ...rest):Boolean {
-                                        return entry != item;
-                                    });
-                                    gradientFill.entries = newGradients;
-                                    object[property.name] = gradientFill.entries;
-                                    clearControlsGroup();
-                                    addControls(newGradients);
-                                });
-
-                                var ratioLabel:Label = new Label();
-                                ratioLabel.text = item.ratio.toString();
-                                BindingUtils.bindProperty(ratioLabel, "text", item, "ratio");
-                                var ratioSlider:HSlider = new HSlider();
-                                ratioSlider.minimum = 0;
-                                ratioSlider.maximum = 1;
-                                ratioSlider.stepSize = .01;
-                                ratioSlider.value = item.ratio;
-                                BindingUtils.bindProperty(item, "ratio", ratioSlider, "value");
-                                controlsGroup.addElement(ratioSlider);
-                                controlsGroup.addElement(ratioLabel);
-                                controlsGroup.addElement(removeButton);
-                            });
-                        }
-
-                        addGradientEntryButton.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void {
-                            var newGradients:Array = [new GradientEntry(0xFF0000, 1)].concat(gradientFill.entries);
-                            overviewRect.invalidateProperties();
-                            newGradients = newGradients.sort(function(a:GradientEntry, b:GradientEntry):int {
-                                return b.ratio - a.ratio;
-                            });
-                            gradientFill.entries = newGradients;
-                            object[property.name] = gradientFill.entries;
-                            clearControlsGroup();
-                            addControls(newGradients);
-                        });
-
-                        group.addElement(addGradientEntryButton);
-                    }
-                    break;
-                default:
-                    return null;
-            }
-            return group;
-        }
-
         private function addFilterPropertyEditors():void {
             FilterDescription.forFilter(filter).forEachProperty(function(property:FilterProperty):void {
-                var component:UIComponent = createComponentFor(filter, property);
+                var component:UIComponent = createPropertyEditor(filter, property);
                 if (component) {
                     filterProperties.addElement(component);
                 }
             });
         }
-
 
         private function selectedFilterChanged():void {
             if (filterCombobox.selectedIndex == -1) {
@@ -295,24 +145,24 @@
 
             //controls
             shapeProperties.removeAllElements();
-            shapeProperties.addElement(createComponentFor(shape.fill, new FilterProperty("color", uint)));
+            shapeProperties.addElement(createPropertyEditor(shape.fill, new FilterProperty("color", uint)));
             var width:FilterProperty = new FilterProperty("percentWidth", Number);
             width.minValue = 0;
             width.maxValue = 100;
-            shapeProperties.addElement(createComponentFor(shape, width));
+            shapeProperties.addElement(createPropertyEditor(shape, width));
             var height:FilterProperty = new FilterProperty("percentHeight", Number);
             height.minValue = 0;
             height.maxValue = 100;
-            shapeProperties.addElement(createComponentFor(shape, height));
+            shapeProperties.addElement(createPropertyEditor(shape, height));
             var alpha:FilterProperty = new FilterProperty("alpha", Number);
             alpha.minValue = 0;
             alpha.maxValue = 1;
-            shapeProperties.addElement(createComponentFor(shape, alpha));
+            shapeProperties.addElement(createPropertyEditor(shape, alpha));
             if (shape.hasOwnProperty("radiusX")) {
-                shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+                shapeProperties.addElement(createPropertyEditor(shape, new FilterProperty("radiusX", Number)));
             }
             if (shape.hasOwnProperty("radiusY")) {
-                shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+                shapeProperties.addElement(createPropertyEditor(shape, new FilterProperty("radiusY", Number)));
             }
             addFilterToShape();
         }
