@@ -15,8 +15,11 @@ public class FilterDescription {
     public function FilterDescription() {
     }
 
-    private function setPropertyAttribute(attribute:String, inspectable:XML):Number {
+    private function setPropertyAttribute(attribute:String, inspectable:XML, targetType:Class = null):* {
         // TODO fhd: Inefficient!
+        if (targetType == null) {
+            targetType = Number;
+        }
         var arg:XML = null;
         for each (var xml:XML in inspectable.arg) {
             if (xml.hasOwnProperty("@key") && xml.@key.toString() == attribute) {
@@ -24,9 +27,20 @@ public class FilterDescription {
             }
         }
         if (arg) {
-            var value:Number = parseFloat(arg.@value.toString());
-            if (value) {
-                return value;
+            var rawValue:String = arg.@value.toString();
+            switch (targetType) {
+                case Number:
+                    var value:Number = parseFloat(rawValue);
+                    if (value) {
+                        return value;
+                    }
+                    break;
+                case Class:
+                    var clazz:Class = getDefinitionByName(rawValue) as Class;
+                    if (clazz) {
+                        return clazz;
+                    }
+                    break;
             }
         }
         return null;
@@ -44,7 +58,7 @@ public class FilterDescription {
         this.filter = filter;
         filterType = description.@name.toString();
         if (filterType.lastIndexOf(":") != -1) {
-            className = filterType.substr(filterType.lastIndexOf(":")+1);
+            className = filterType.substr(filterType.lastIndexOf(":") + 1);
         } else {
             className = filterType;
         }
@@ -57,6 +71,7 @@ public class FilterDescription {
                 if (inspectable) {
                     property.minValue = setPropertyAttribute("minValue", inspectable);
                     property.maxValue = setPropertyAttribute("maxValue", inspectable);
+                    property.arrayType = setPropertyAttribute("arrayType", inspectable, Class);
                 }
             }
             propertiesByName[propertyName] = property;

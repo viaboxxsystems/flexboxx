@@ -1,7 +1,10 @@
 package de.viaboxx.filterboxx {
+import mx.graphics.GradientEntry;
+
 import org.flexunit.assertThat;
 import org.hamcrest.collection.array;
 import org.hamcrest.object.equalTo;
+import org.hamcrest.object.notNullValue;
 
 import spark.filters.DropShadowFilter;
 
@@ -68,6 +71,28 @@ public class FilterDescriptionTest {
         assertThat(desc.getProperty("a").maxValue, equalTo(100));
     }
 
+    //    [Test]
+    //    public function extractTypeInfo():void {
+    //        assertThat("",equalTo(describeType(new GradientBevelFilter())))
+    //    }
+
+    [Test]
+    public function gradientEntriesPropertyFound():void {
+        var desc:FilterDescription = FilterDescription.forFilter(new TestGradientEntryFilter());
+        assertThat(desc.getProperty("entries"), notNullValue());
+    }
+
+    [Test]
+    public function gradientEntriesPropertyClassIsArray():void {
+        var desc:FilterDescription = FilterDescription.forFilter(new TestGradientEntryFilter());
+        assertThat(desc.getProperty("entries").dataType, equalTo(Array));
+    }
+
+    [Test]
+    public function arrayEntryTypeIsCorrect():void {
+        var desc:FilterDescription = FilterDescription.forFilter(new TestGradientEntryFilter());
+        assertThat(desc.getProperty("entries").arrayType, equalTo(GradientEntry));
+    }
 }
 }
 
@@ -89,9 +114,24 @@ class TestFilter implements IBitmapFilter {
     }
 
     [Inspectable(minValue="0.1", maxValue="1.0")]
-    [Inspectable]        
+    [Inspectable]
     public function get b():Number {
         return _b;
+    }
+
+    public function clone():BitmapFilter {
+        return null;
+    }
+}
+
+
+class TestGradientEntryFilter implements IBitmapFilter {
+
+    private var _entries:Array;
+
+    [Inspectable(category="General", arrayType="mx.graphics.GradientEntry")]
+    public function get entries():Array {
+        return _entries;
     }
 
     public function clone():BitmapFilter {

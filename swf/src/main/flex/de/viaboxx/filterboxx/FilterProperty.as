@@ -4,6 +4,7 @@ public class FilterProperty {
     public var dataType:Class;
     public var minValue:Number;
     public var maxValue:Number;
+    public var arrayType:Class;
 
     public function FilterProperty(name:String, dataType:Class) {
         this.name = name;
