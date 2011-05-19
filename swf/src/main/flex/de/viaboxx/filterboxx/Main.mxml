@@ -16,6 +16,8 @@
         import mx.core.UIComponent;
         import mx.graphics.SolidColor;
 
+        import mx.graphics.SolidColorStroke;
+
         import spark.filters.BevelFilter;
         import spark.filters.BlurFilter;
         import spark.filters.ColorMatrixFilter;
@@ -81,6 +83,7 @@
             shape.horizontalCenter = 0;
             shape.verticalCenter = 0;
             shape.fill = new SolidColor(0xFF0000);
+            shape.stroke = new SolidColorStroke(0);
             return shape;
         }
 
@@ -135,6 +138,12 @@
         }
 
         private function selectedShapeChanged():void {
+            function createLabel(text:String):Label {
+                var label:Label = new Label();
+                label.text = text;
+                return label;
+            }
+
             function addEditor(element:*, propertyData:Object):void {
                 if (!element.hasOwnProperty(propertyData.name)) {
                     return;
@@ -160,7 +169,12 @@
 
             // Create the editor controls.
             shapeProperties.removeAllElements();
+            shapeProperties.addElement(createLabel("shape.fill"));
             addEditor(shape.fill, {name: "color", type: uint});
+            shapeProperties.addElement(createLabel("shape.stroke"));
+            addEditor(shape.stroke, {name: "color", type: uint});
+            addEditor(shape.stroke, {name: "weight", type: Number});
+            shapeProperties.addElement(createLabel("shape"));
             addEditor(shape, {name: "percentWidth", type: Number, minValue: 0, maxValue: 100});
             addEditor(shape, {name: "percentHeight", type: Number, minValue: 0, maxValue: 100});
             addEditor(shape, {name: "alpha", type: Number, minValue: 0, maxValue: 1});
