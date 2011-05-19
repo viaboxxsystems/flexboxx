@@ -136,35 +136,37 @@
         }
 
         private function selectedShapeChanged():void {
+            function addEditor(object:*, propertyData:Object):void {
+                if (!object.hasOwnProperty(propertyData.name)) {
+                    return;
+                }
+
+                var property:FilterProperty = new FilterProperty(propertyData.name, propertyData.type);
+                if (propertyData.hasOwnProperty("minValue")) {
+                    property.minValue = propertyData.minValue;
+                }
+                if (propertyData.hasOwnProperty("maxValue")) {
+                    property.maxValue = propertyData.maxValue;
+                }
+                shapeProperties.addElement(createPropertyEditor(object, property));
+            }
+
             if (shapeCombobox.selectedIndex == -1) {
                 shapeCombobox.selectedIndex = 0;
             }
             shape = shapeCombobox.selectedItem;
+            addFilterToShape();
             shapeGroup.removeAllElements();
             shapeGroup.addElement(shape);
 
-            //controls
+            // Create the editor controls.
             shapeProperties.removeAllElements();
-            shapeProperties.addElement(createPropertyEditor(shape.fill, new FilterProperty("color", uint)));
-            var width:FilterProperty = new FilterProperty("percentWidth", Number);
-            width.minValue = 0;
-            width.maxValue = 100;
-            shapeProperties.addElement(createPropertyEditor(shape, width));
-            var height:FilterProperty = new FilterProperty("percentHeight", Number);
-            height.minValue = 0;
-            height.maxValue = 100;
-            shapeProperties.addElement(createPropertyEditor(shape, height));
-            var alpha:FilterProperty = new FilterProperty("alpha", Number);
-            alpha.minValue = 0;
-            alpha.maxValue = 1;
-            shapeProperties.addElement(createPropertyEditor(shape, alpha));
-            if (shape.hasOwnProperty("radiusX")) {
-                shapeProperties.addElement(createPropertyEditor(shape, new FilterProperty("radiusX", Number)));
-            }
-            if (shape.hasOwnProperty("radiusY")) {
-                shapeProperties.addElement(createPropertyEditor(shape, new FilterProperty("radiusY", Number)));
-            }
-            addFilterToShape();
+            addEditor(shape.fill, {name: "color", type: uint});
+            addEditor(shape, {name: "percentWidth", type: Number, minValue: 0, maxValue: 100});
+            addEditor(shape, {name: "percentHeight", type: Number, minValue: 0, maxValue: 100});
+            addEditor(shape, {name: "alpha", type: Number, minValue: 0, maxValue: 1});
+            addEditor(shape, {name: "radiusX", type: Number});
+            addEditor(shape, {name: "radiusY", type: Number});
         }
 
         ]]>
