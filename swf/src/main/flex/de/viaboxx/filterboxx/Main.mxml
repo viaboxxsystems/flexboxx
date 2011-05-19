@@ -4,8 +4,8 @@
         xmlns:s="library://ns.adobe.com/flex/spark"
         xmlns:mx="library://ns.adobe.com/flex/mx"
         showStatusBar="true"
-        width="800"
-        height="600"
+        width="1024"
+        height="768"
         backgroundColor="#EDEDED"
         applicationComplete="selectedShapeChanged(); selectedFilterChanged()"
         >
