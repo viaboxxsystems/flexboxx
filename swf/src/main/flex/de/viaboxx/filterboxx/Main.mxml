@@ -16,7 +16,6 @@
         import mx.collections.ArrayList;
         import mx.controls.CheckBox;
         import mx.controls.ColorPicker;
-        import mx.controls.sliderClasses.Slider;
         import mx.core.UIComponent;
         import mx.graphics.GradientEntry;
         import mx.graphics.LinearGradient;
@@ -36,6 +35,10 @@
         import spark.primitives.Ellipse;
         import spark.primitives.Rect;
         import spark.primitives.supportClasses.FilledElement;
+
+
+
+
 
         [Embed(source="../../../../resources/FuturaMediumBT.ttf",
                 fontName="FuturaEmbed",
@@ -257,6 +260,7 @@
             });
         }
 
+
         private function selectedFilterChanged():void {
             if (filterCombobox.selectedIndex == -1) {
                 filterCombobox.selectedIndex = 0;
@@ -271,7 +275,6 @@
         private function clearFilterPropertyEditors():void {
             filterProperties.removeAllElements();
         }
-
 
         private function addFilterToShape():void {
             shape.filters = [filter];
@@ -314,7 +317,702 @@
         }
 
         ]]>
-        </fx:Script>
+               }
+        addFilterToShape();
+        }
+
+        ]]>
+        (createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        operty("radiusY")
+        )
+        {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        iusX
+        ", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        entFor(shape, new FilterProperty("radiusX", Number))
+        )
+        ;
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        roperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        ")) {
+        shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        ComponentFor(shape, alpha)
+        )
+        ;
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        hapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        pha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        roperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        pha:FilterProperty = new FilterProperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        ,
+        height
+        ))
+        ;
+        var alpha:FilterProperty = new FilterProperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        ddElement(createComponentFor(shape, height));
+        var alpha:FilterProperty = new FilterProperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        lue = 100;
+        shapeProperties.addElement(createComponentFor(shape, height));
+        var alpha:FilterProperty = new FilterProperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        lue = 0;
+        height.maxValue = 100;
+        shapeProperties.addElement(createComponentFor(shape, height));
+        var alpha:FilterProperty = new FilterProperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        )
+        ;
+        height.minValue = 0;
+        height.maxValue = 100;
+        shapeProperties.addElement(createComponentFor(shape, height));
+        var alpha:FilterProperty = new FilterProperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        t.maxValue = 100;
+        shapeProperties.addElement(createComponentFor(shape, height));
+        var alpha:FilterProperty = new FilterProperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        .
+        maxValue = 100;
+        shapeProperties.addElement(createComponentFor(shape, height));
+        var alpha:FilterProperty = new FilterProperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        shapeProperties.addElement(createComponentFor(shape, height));
+        var alpha:FilterProperty = new FilterProperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        hapeProperties.addElement(createComponentFor(shape, height));
+        var alpha:FilterProperty = new FilterProperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        ComponentFor(shape, height)
+        )
+        ;
+        var alpha:FilterProperty = new FilterProperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        omponentFor(shape, height)
+        )
+        ;
+        var alpha:FilterProperty = new FilterProperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        var alpha:FilterProperty = new FilterProperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        var alpha:FilterProperty = new FilterProperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        terProperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        erProperty("alpha", Number);
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        alpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        lpha.minValue = 0;
+        alpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        lpha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        pha.maxValue = 1;
+        shapeProperties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        erties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        rties.addElement(createComponentFor(shape, alpha));
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        pe,alpha
+        ))
+        ;
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        e,alpha
+        ))
+        ;
+        if (shape.hasOwnProperty("radiusX")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        e.hasOwnProperty("radiusX")
+        )
+        {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        .
+        hasOwnProperty("radiusX")
+        )
+        {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        lement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        ement(createComponentFor(shape, new FilterProperty("radiusX", Number)));
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        new FilterProperty("radiusX", Number)
+        ))
+        ;
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        ew
+        FilterProperty("radiusX", Number)
+        ))
+        ;
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        mber
+        )))
+        ;
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        ber
+        )))
+        ;
+        }
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        if (shape.hasOwnProperty("radiusY")) {
+            shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        sY
+        ")) {
+        shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        Y
+        ")) {
+        shapeProperties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        rties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        ties.addElement(createComponentFor(shape, new FilterProperty("radiusY", Number)));
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        nentFor(shape, new FilterProperty("radiusY", Number))
+        )
+        ;
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        entFor(shape, new FilterProperty("radiusY", Number))
+        )
+        ;
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        y("radiusY", Number)
+        ))
+        ;
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        ("radiusY",Number)
+        ))
+        ;
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        }
+        addFilterToShape();
+        }
+
+        ]]>
+        hape();
+        }
+
+        ]]>
+        ape();
+        }
+
+        ]]>
+    </fx:Script>
 
 
     <fx:Declarations>
