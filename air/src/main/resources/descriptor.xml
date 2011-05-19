@@ -43,12 +43,21 @@
 
     <!-- Settings for the application's initial window. Required. -->
     <initialWindow>
+
+        <aspectRatio>landscape</aspectRatio>
+
+        <autoOrients>false</autoOrients>
+
+        <renderMode>auto</renderMode>
+
+        <fullScreen>false</fullScreen>
+
         <!-- The main SWF or HTML file of the application. Required. -->
         <!-- Note: In Flex Builder, the SWF reference is set automatically. -->
         <content>${output}</content>
 
         <!-- The title of the main window. Optional. -->
-        <!-- <title></title> -->
+         <title>Filterboxx</title>
 
         <!-- The type of system chrome to use (either "standard" or "none"). Optional. Default standard. -->
         <!-- set to none in production mode -->
@@ -58,13 +67,13 @@
         <transparent>false</transparent>
 
         <!-- Whether the window is initially visible. Optional. Default false. -->
-        <!-- <visible>true</visible> -->
+         <visible>true</visible>
 
         <!-- Whether the user can minimize the window. Optional. Default true. -->
-        <!-- <minimizable></minimizable> -->
+         <minimizable>true</minimizable>
 
         <!-- Whether the user can maximize the window. Optional. Default true. -->
-        <!-- <maximizable></maximizable> -->
+         <maximizable>true</maximizable>
 
         <!-- Whether the user can resize the window. Optional. Default true. -->
         <resizable>true</resizable>
@@ -76,16 +85,16 @@
         <height>1080</height>
 
         <!-- The window's initial x position. Optional. -->
-        <!-- <x></x> -->
+         <x>50</x>
 
         <!-- The window's initial y position. Optional. -->
-        <!-- <y></y> -->
+         <y>50</y>
 
         <!-- The window's minimum size, specified as a width/height pair, such as "400 200". Optional. -->
-        <!-- <minSize></minSize> -->
+         <minSize>640 480</minSize>
 
         <!-- The window's initial maximum size, specified as a width/height pair, such as "1600 1200". Optional. -->
-        <!-- <maxSize></maxSize> -->
+         <maxSize>1024 768</maxSize>
     </initialWindow>
 
     <!-- The subpath of the standard default installation location to use. Optional. -->

@@ -7,9 +7,28 @@
         width="800"
         height="600"
         backgroundColor="#EDEDED"
+        applicationComplete="selectedFilterChanged()"
         >
     <fx:Script>
     <![CDATA[
+
+        import mx.binding.utils.BindingUtils;
+        import mx.collections.ArrayList;
+        import mx.controls.CheckBox;
+        import mx.controls.ColorPicker;
+
+        import spark.components.HGroup;
+        import spark.components.HSlider;
+        import spark.components.Spinner;
+        import spark.filters.BevelFilter;
+        import spark.filters.BlurFilter;
+        import spark.filters.ColorMatrixFilter;
+        import spark.filters.ConvolutionFilter;
+        import spark.filters.DisplacementMapFilter;
+        import spark.filters.GlowFilter;
+        import spark.filters.GradientBevelFilter;
+        import spark.filters.GradientGlowFilter;
+        import spark.filters.ShaderFilter;
 
         [Embed(source="../../../../resources/FuturaMediumBT.ttf",
                 fontName="FuturaEmbed",
@@ -42,11 +61,155 @@
                 mimeType="application/x-font",
                 embedAsCFF="true")]
         private const FuturaItalicBold:Class;
+
+
+        private var filterList:ArrayList = new ArrayList([
+            new DropShadowFilter(), 
+            new GlowFilter(),
+            new BevelFilter(),
+            new BlurFilter(),
+            new ColorMatrixFilter(),
+            new ConvolutionFilter(),
+//            new DisplacementMapFilter(),
+            new DropShadowFilter(),
+            new GradientBevelFilter(),
+            new GradientGlowFilter(),
+            new ShaderFilter()]);
+
+        public var filter:IBitmapFilter = dropShadowFilter;
+
+        private function addFilterPropertyEditors():void {
+            FilterDescription.forFilter(filter).forEachProperty(function(property:FilterProperty):void {
+                var group:HGroup = new HGroup();
+                group.gap = 5;
+                var label:Label = new Label();
+                label.text = property.name;
+                switch (property.dataType) {
+                    case Boolean:
+                        var checkbox:CheckBox = new CheckBox();
+                        checkbox.label = property.name;
+                        checkbox.selected = filter[property.name];
+                        BindingUtils.bindProperty(filter, property.name, checkbox, "selected");
+                        group.addElement(checkbox);
+                        filterProperties.addElement(group);
+                        break;
+                    case int:
+                    //fall-through
+                    case Number:
+                        if (property.maxValue) {
+                            var slider:HSlider = new HSlider();
+                            slider.minimum = property.minValue;
+                            slider.maximum = property.maxValue;
+                            slider.stepSize = 0.01;
+                            slider.value = filter[property.name];
+                            BindingUtils.bindProperty(filter, property.name, slider, "value");
+                            group.addElement(label);
+                            group.addElement(slider);
+                            if (property.maxValue - property.minValue > 100) {
+                                var spinner:Spinner = new Spinner();
+                                spinner.value = slider.value;
+                                BindingUtils.bindProperty(spinner, "value", slider, "value");
+                                BindingUtils.bindProperty(slider, "value", spinner, "value");
+                                group.addElement(spinner);
+                            }
+                            filterProperties.addElement(group);
+                        } else {
+                            var spinner:Spinner = new Spinner();
+                            spinner.stepSize = 1;
+                            spinner.value = filter[property.name];
+                            var valueLabel:Label = new Label();
+                            valueLabel.text = filter[property.name];
+                            BindingUtils.bindProperty(filter, property.name, spinner, "value");
+                            BindingUtils.bindProperty(valueLabel, "text", spinner, "value");
+                            group.addElement(label);
+                            group.addElement(valueLabel);
+                            group.addElement(spinner);
+                            filterProperties.addElement(group);
+                        }
+                        break;
+                    case uint:
+                        var colorPicker:ColorPicker = new ColorPicker();
+                        colorPicker.selectedColor = filter[property.name];
+                        BindingUtils.bindProperty(filter, property.name, colorPicker, "selectedColor");
+                        group.addElement(label);
+                        group.addElement(colorPicker);
+                        filterProperties.addElement(group);
+                        break;
+                }
+            });
+        }
+
+        private function selectedFilterChanged():void {
+            if (filterCombobox.selectedIndex == -1) {
+                filterCombobox.selectedIndex = 0;
+            }
+            filter = filterCombobox.selectedItem;
+            removeFilterFromShape();
+            clearFilterPropertyEditors();
+            addFilterPropertyEditors();
+            addFilterToShape();
+        }
+
+        private function clearFilterPropertyEditors():void {
+            filterProperties.removeAllElements();
+        }
+
+
+        private function addFilterToShape():void {
+            shape.filters = [filter];
+        }
+
+        private function removeFilterFromShape():void {
+            shape.filters = [];
+        }
+
         ]]>
         </fx:Script>
 
 
-    
+    <fx:Declarations>
+        <s:DropShadowFilter
+                id="dropShadowFilter"
+                />
+    </fx:Declarations>
+
+    <mx:HDividedBox
+            borderStyle="solid"
+            width="100%"
+            height="100%"
+            >
+        <s:VGroup width="30%">
+            <s:Label text="Filter"/>
+            <s:ComboBox id="filterCombobox" dataProvider="{filterList}" change="selectedFilterChanged()"/>
+            <s:VGroup id="filterProperties" width="100%"/>
+        </s:VGroup>
+        <mx:VDividedBox width="70%" height="100%">
+            <s:Group
+                    width="100%"
+                    height="70%"
+                    >
+                <s:Rect
+                        id="shape"
+                        width="50%"
+                        height="50%"
+                        horizontalCenter="0"
+                        verticalCenter="0"
+                        filters="{[dropShadowFilter]}"
+                        >
+
+                    <s:fill>
+                        <s:SolidColor color="red"/>
+                    </s:fill>
+                    <s:stroke>
+                        <s:SolidColorStroke color="blue"/>
+                    </s:stroke>
+                </s:Rect>
+            </s:Group>
+            <s:Group height="30%">
+                <s:TextArea text="SOURCES" editable="false"/>
+            </s:Group>
+        </mx:VDividedBox>
+    </mx:HDividedBox>
 
 
 </s:WindowedApplication>
