@@ -1,7 +1,4 @@
 package de.viaboxx.filterboxx {
-import mx.filters.IBitmapFilter;
-import mx.formatters.NumberFormatter;
-
 import org.flexunit.assertThat;
 import org.hamcrest.object.equalTo;
 import org.hamcrest.text.endsWith;
@@ -9,7 +6,7 @@ import org.hamcrest.text.startsWith;
 
 import spark.filters.DropShadowFilter;
 
-public class FilterSourceGeneratorTest {
+public class FilterSourceGeneratorTest extends FilterSourceGenerator{
 
     public function FilterSourceGeneratorTest() {
         //empty constructor
@@ -17,7 +14,7 @@ public class FilterSourceGeneratorTest {
 
     [Test]
     public function generateRootTag():void {
-        var result:String = rootXMLForFilterDescription(new DropShadowFilter());
+        var result:String = sourceForFilter(new DropShadowFilter());
         var expected:String = "<s:DropShadowFilter";
         assertThat(result, startsWith(expected));
         assertThat(result, endsWith("/>"));
@@ -26,53 +23,25 @@ public class FilterSourceGeneratorTest {
     [Test]
     public function generateIntAttributesWorks():void {
         assertThat(
-                rootXMLForFilterDescription(new IntTestFilter()),
+                sourceForFilter(new IntTestFilter()),
                 equalTo('<s:IntTestFilter\na="0"\n/>'));
     }
 
     [Test]
     public function generateFloatAttributesFormattedCorrectly():void {
-        assertThat(rootXMLForFilterDescription(new FloatTestFilter()), equalTo('<s:FloatTestFilter\naFloat="0.00"\nanother="12.23"\n/>'))
+        assertThat(sourceForFilter(new FloatTestFilter()), equalTo('<s:FloatTestFilter\naFloat="0.00"\nanother="12.23"\n/>'))
     }
 
     [Test]
     public function generateColorAttributesCorrectly():void {
-        assertThat(rootXMLForFilterDescription(new ColorTestFilter()), equalTo('<s:ColorTestFilter\nblack="0x000000"\nblue="0x0000FF"\n/>'));
+        assertThat(sourceForFilter(new ColorTestFilter()), equalTo('<s:ColorTestFilter\nblack="0x000000"\nblue="0x0000FF"\n/>'));
     }
 
     [Test]
     public function namespacePrefixIsCustomizable():void {
-        assertThat(rootXMLForFilterDescription(new IntTestFilter(), "asd"), startsWith("<asd:"));
+        assertThat(sourceForFilter(new IntTestFilter(), "asd"), startsWith("<asd:"));
     }
 
-    private function rootXMLForFilterDescription(filter:IBitmapFilter, namespacePrefix:String = "s"):String {
-        var filterDescription:FilterDescription = FilterDescription.forFilter(filter);
-        var source:String = "<" + namespacePrefix + ":" + filterDescription.className;
-        var fistAttribute:Boolean = true;
-        filterDescription.forEachProperty(function(property:FilterProperty):void {
-            if (fistAttribute) {
-                source += "\n";
-                fistAttribute = false;
-            }
-            source += property.name + '="' + format(filter[property.name], property.dataType) + '"\n';
-        });
-        source += "/>";
-        return source;
-    }
-
-    private function format(value:*, dataType:Class):String {
-        switch (dataType) {
-            case Number:
-                var formatter:NumberFormatter = new NumberFormatter();
-                formatter.decimalSeparatorTo = ".";
-                formatter.precision = 2;
-                return formatter.format(value);
-            case uint:
-                return formatHex(value);
-            default:
-                return value.toString();
-        }
-    }
 }
 }
 

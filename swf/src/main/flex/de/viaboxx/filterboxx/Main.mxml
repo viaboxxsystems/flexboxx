@@ -24,7 +24,6 @@
         import spark.filters.BlurFilter;
         import spark.filters.ColorMatrixFilter;
         import spark.filters.ConvolutionFilter;
-        import spark.filters.DisplacementMapFilter;
         import spark.filters.GlowFilter;
         import spark.filters.GradientBevelFilter;
         import spark.filters.GradientGlowFilter;
@@ -64,19 +63,30 @@
 
 
         private var filterList:ArrayList = new ArrayList([
-            new DropShadowFilter(), 
+            new DropShadowFilter(),
             new GlowFilter(),
             new BevelFilter(),
             new BlurFilter(),
             new ColorMatrixFilter(),
             new ConvolutionFilter(),
-//            new DisplacementMapFilter(),
+            //            new DisplacementMapFilter(),
             new DropShadowFilter(),
             new GradientBevelFilter(),
             new GradientGlowFilter(),
             new ShaderFilter()]);
 
         public var filter:IBitmapFilter = dropShadowFilter;
+
+        private static const sourceGenerator:FilterSourceGenerator = new FilterSourceGenerator();
+
+        private function generateSources():String {
+            if (filter) {
+                return sourceGenerator.sourceForFilter(filter);
+            } else {
+                return "NO FILTER SELECTED";
+            }
+
+        }
 
         private function addFilterPropertyEditors():void {
             FilterDescription.forFilter(filter).forEachProperty(function(property:FilterProperty):void {
@@ -205,9 +215,10 @@
                     </s:stroke>
                 </s:Rect>
             </s:Group>
-            <s:Group height="30%">
-                <s:TextArea text="SOURCES" editable="false"/>
-            </s:Group>
+            <s:VGroup height="30%" width="100%">
+                <s:Button label="Generate Sources" click="{theSource.text = generateSources()}"/>
+                <s:TextArea id="theSource" editable="false" width="100%" height="100%"/>
+            </s:VGroup>
         </mx:VDividedBox>
     </mx:HDividedBox>
 
