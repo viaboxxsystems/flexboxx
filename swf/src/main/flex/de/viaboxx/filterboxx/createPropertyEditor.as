@@ -16,7 +16,7 @@ import spark.components.Spinner;
 import spark.components.VGroup;
 import spark.primitives.Rect;
 
-public function createPropertyEditor(object:*, property:FilterProperty):Group {
+public function createPropertyEditor(element:*, property:FilterProperty):Group {
     var group:HGroup = new HGroup(),
             label:Label = new Label();
     group.gap = 5;
@@ -25,8 +25,8 @@ public function createPropertyEditor(object:*, property:FilterProperty):Group {
     function createCheckBoxEditor():void {
         var checkbox:CheckBox = new CheckBox();
         checkbox.label = property.name;
-        checkbox.selected = object[property.name];
-        BindingUtils.bindProperty(object, property.name, checkbox, "selected");
+        checkbox.selected = element[property.name];
+        BindingUtils.bindProperty(element, property.name, checkbox, "selected");
         group.addElement(checkbox);
     }
 
@@ -35,8 +35,8 @@ public function createPropertyEditor(object:*, property:FilterProperty):Group {
         slider.minimum = property.minValue;
         slider.maximum = property.maxValue;
         slider.stepSize = 0.01;
-        slider.value = object[property.name];
-        BindingUtils.bindProperty(object, property.name, slider, "value");
+        slider.value = element[property.name];
+        BindingUtils.bindProperty(element, property.name, slider, "value");
         group.addElement(label);
         group.addElement(slider);
         if (property.maxValue - property.minValue > 100) {
@@ -51,10 +51,10 @@ public function createPropertyEditor(object:*, property:FilterProperty):Group {
     function createSpinnerEditor():void {
         var spinner:Spinner = new Spinner();
         spinner.stepSize = 1;
-        spinner.value = object[property.name];
+        spinner.value = element[property.name];
         var valueLabel:Label = new Label();
-        valueLabel.text = object[property.name];
-        BindingUtils.bindProperty(object, property.name, spinner, "value");
+        valueLabel.text = element[property.name];
+        BindingUtils.bindProperty(element, property.name, spinner, "value");
         BindingUtils.bindProperty(valueLabel, "text", spinner, "value");
         group.addElement(label);
         group.addElement(valueLabel);
@@ -63,8 +63,8 @@ public function createPropertyEditor(object:*, property:FilterProperty):Group {
 
     function createColorEditor():void {
         var colorPicker:ColorPicker = new ColorPicker();
-        colorPicker.selectedColor = object[property.name];
-        BindingUtils.bindProperty(object, property.name, colorPicker, "selectedColor");
+        colorPicker.selectedColor = element[property.name];
+        BindingUtils.bindProperty(element, property.name, colorPicker, "selectedColor");
         group.addElement(label);
         group.addElement(colorPicker);
     }
@@ -111,7 +111,7 @@ public function createPropertyEditor(object:*, property:FilterProperty):Group {
                         return entry != item;
                     });
                     gradientFill.entries = newGradients;
-                    object[property.name] = gradientFill.entries;
+                    element[property.name] = gradientFill.entries;
                     clearControlsGroup();
                     addControls(newGradients);
                 });
@@ -138,7 +138,7 @@ public function createPropertyEditor(object:*, property:FilterProperty):Group {
                 return b.ratio - a.ratio;
             });
             gradientFill.entries = newGradients;
-            object[property.name] = gradientFill.entries;
+            element[property.name] = gradientFill.entries;
             clearControlsGroup();
             addControls(newGradients);
         });

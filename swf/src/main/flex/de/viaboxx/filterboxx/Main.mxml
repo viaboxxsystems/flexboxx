@@ -69,7 +69,6 @@
             new ColorMatrixFilter(),
             new ConvolutionFilter(),
             //            new DisplacementMapFilter(),
-            new DropShadowFilter(),
             new GradientBevelFilter(),
             new GradientGlowFilter(),
             new ShaderFilter()]);
@@ -136,8 +135,8 @@
         }
 
         private function selectedShapeChanged():void {
-            function addEditor(object:*, propertyData:Object):void {
-                if (!object.hasOwnProperty(propertyData.name)) {
+            function addEditor(element:*, propertyData:Object):void {
+                if (!element.hasOwnProperty(propertyData.name)) {
                     return;
                 }
 
@@ -148,7 +147,7 @@
                 if (propertyData.hasOwnProperty("maxValue")) {
                     property.maxValue = propertyData.maxValue;
                 }
-                shapeProperties.addElement(createPropertyEditor(object, property));
+                shapeProperties.addElement(createPropertyEditor(element, property));
             }
 
             if (shapeCombobox.selectedIndex == -1) {
