@@ -3,8 +3,6 @@ import mx.filters.IBitmapFilter;
 import mx.formatters.NumberFormatter;
 import mx.graphics.GradientEntry;
 
-import org.hamcrest.collection.array;
-
 public class FilterSourceGenerator {
     private var formatter:NumberFormatter;
 
