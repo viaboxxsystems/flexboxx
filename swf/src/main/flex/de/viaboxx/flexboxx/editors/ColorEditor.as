@@ -6,7 +6,7 @@ import mx.controls.ColorPicker;
 
 public class ColorEditor extends LabeledEditor {
     public function ColorEditor(element:*, property:Property) {
-        super(property.name);
+        super(property.displayName);
 
 
 

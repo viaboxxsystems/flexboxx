@@ -10,7 +10,7 @@ import spark.layouts.HorizontalLayout;
 
 public class SliderEditor extends LabeledEditor {
     public function SliderEditor(element:*, property:Property) {
-        super(property.name);
+        super(property.displayName);
         //setupLayout();
         var slider:HSlider = addSlider(property, element);
         if (property.maxValue - property.minValue > 1) {

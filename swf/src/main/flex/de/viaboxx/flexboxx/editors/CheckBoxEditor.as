@@ -10,7 +10,7 @@ public class CheckBoxEditor extends PropertyEditor {
     public function CheckBoxEditor(element:*, property:Property) {
         content.layout = new HorizontalLayout();
         var checkbox:CheckBox = new CheckBox();
-        checkbox.label = property.name;
+        checkbox.label = property.displayName;
         checkbox.selected = element[property.name];
         BindingUtils.bindProperty(element, property.name, checkbox, "selected");
         content.addElement(checkbox);

@@ -144,6 +144,9 @@
                 }
 
                 var property:Property = new Property(propertyData.name, propertyData.type);
+                if(propertyData.hasOwnProperty("displayName")){
+                    property.displayName = propertyData.displayName;
+                }
                 if (propertyData.hasOwnProperty("minValue")) {
                     property.minValue = propertyData.minValue;
                 }
@@ -165,12 +168,9 @@
 
             // Create the editor controls.
             shapeProperties.removeAllElements();
-            shapeProperties.addElement(createLabel("shape.fill"));
-            addEditor(shape.fill, {name: "color", type: uint});
-            shapeProperties.addElement(createLabel("shape.stroke"));
-            addEditor(shape.stroke, {name: "color", type: uint});
-            addEditor(shape.stroke, {name: "weight", type: Number});
-            shapeProperties.addElement(createLabel("shape"));
+            addEditor(shape.fill, {name: "color", displayName:"Fill color",type: uint});
+            addEditor(shape.stroke, {name: "color", displayName:"Stroke color", type: uint});
+            addEditor(shape.stroke, {name: "weight", displayName:"Stroke weight", type: Number});
 
             addEditor(shape, {name: "width", type: Number, minValue: 0, maxValue: 1000}, SpinnerEditor);
             addEditor(shape, {name: "height", type: Number, minValue: 0, maxValue: 1000}, SpinnerEditor);

@@ -7,7 +7,7 @@ import spark.components.NumericStepper;
 
 public class SpinnerEditor extends LabeledEditor {
     public function SpinnerEditor(element:*, property:Property) {
-        super(property.name);
+        super(property.displayName);
         rightAlignContent();
 
         var spinner:NumericStepper = new NumericStepper();
