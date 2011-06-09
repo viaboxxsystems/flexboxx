@@ -1,9 +1,17 @@
 package de.viaboxx.flexboxx.editors {
-import spark.components.HGroup;
+import mx.graphics.SolidColorStroke;
 
-public class PropertyEditor extends HGroup {
+import spark.components.Group;
+import spark.primitives.Rect;
+
+public class PropertyEditor extends Group {
+
     public function PropertyEditor() {
-        gap = 5;
+        var rect:Rect = new Rect();
+        rect.stroke = new SolidColorStroke(0x333333,1,0.3);
+        rect.percentWidth = 100;
+        rect.top = 0;
+        addElement(rect);
     }
 }
 }

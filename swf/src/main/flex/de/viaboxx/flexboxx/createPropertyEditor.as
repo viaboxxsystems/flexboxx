@@ -12,8 +12,9 @@ import mx.graphics.GradientEntry;
  * Creates a new PropertyEditor for the given property.
  * @param element The object manipulated using the editor.
  * @param property The property description of the value inside <code>element</code> being edited.
- * @param editorClass Optional editor type to instantiate. Default is null (=type/metadata-based default editor) 
- * @return A PropertyEditor for the given property of <code>element</code>.
+ * @param editorClass Optional editor type to instantiate. Default is null (=type/metadata-based default editor)
+ * @return A PropertyEditor for the given property of <code>element</code> or <code>null</code> if no editor
+ * could be instantiated.
  */
 public function createPropertyEditor(element:*, property:Property, editorClass:Class = null):PropertyEditor {
 
@@ -24,7 +25,7 @@ public function createPropertyEditor(element:*, property:Property, editorClass:C
             case int:
             //fall-through
             case Number:
-                return (property.maxValue) ?  SliderEditor : SpinnerEditor;
+                return (property.maxValue) ? SliderEditor : SpinnerEditor;
             case uint:
                 return ColorEditor;
             case Array:
@@ -36,8 +37,10 @@ public function createPropertyEditor(element:*, property:Property, editorClass:C
         }
     }
 
+    editorClass = editorClass || editorForProperty(property);
+
     if (editorClass == null) {
-        editorClass = editorForProperty(property);
+        return null;
     }
 
     return new editorClass(element, property);
