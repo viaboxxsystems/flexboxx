@@ -6,9 +6,13 @@ import spark.primitives.Rect;
 
 public class PropertyEditor extends Group {
 
+    protected var content:Group = new Group();
+
     public function PropertyEditor() {
+        percentWidth = 100;
+        addElement(content);
         var rect:Rect = new Rect();
-        rect.stroke = new SolidColorStroke(0x333333,1,0.3);
+        rect.stroke = new SolidColorStroke(0x333333, 1, 0.3);
         rect.percentWidth = 100;
         rect.top = 0;
         addElement(rect);

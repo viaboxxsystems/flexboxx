@@ -1,5 +1,4 @@
 package de.viaboxx.flexboxx.editors {
-import spark.components.Group;
 import spark.components.Label;
 import spark.layouts.VerticalLayout;
 
@@ -9,13 +8,10 @@ public class LabeledEditor extends PropertyEditor {
     public var propertyName:String;
 
     private var propertyLabel:Label;
-    protected var content:Group = new Group();
 
     public function LabeledEditor(propertyName:String) {
         super();
-        percentWidth = 100;
         addPropertyLabel(propertyName);
-        addElement(content);
     }
 
     private function addPropertyLabel(propertyName:String):void {
