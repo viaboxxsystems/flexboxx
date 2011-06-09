@@ -1,4 +1,6 @@
 package de.viaboxx.flexboxx {
+import de.viaboxx.flexboxx.editors.PropertyEditor;
+
 import mx.controls.ColorPicker;
 import mx.graphics.GradientEntry;
 
@@ -20,7 +22,7 @@ public class CreatePropertyEditorTest {
     public function checkboxForBoolean():void {
         var object:Object = {};
         var property:Property = new Property("x", Boolean);
-        var editor:Group = createPropertyEditor(object, property);
+        var editor:PropertyEditor = createPropertyEditor(object, property);
         assertThat(editor, notNullValue());
         assertThat(editor.getElementAt(0), isA(CheckBox));
     }
@@ -30,7 +32,7 @@ public class CreatePropertyEditorTest {
         var object:Object = {};
         var property:Property = new Property("n", Number);
         property.maxValue = 100;
-        var editor:Group = createPropertyEditor(object, property);
+        var editor:PropertyEditor = createPropertyEditor(object, property);
         assertThat(editor, notNullValue());
         assertThat(editor.getElementAt(1), isA(HSlider));
     }
@@ -41,7 +43,7 @@ public class CreatePropertyEditorTest {
         var property:Property = new Property("n", Number);
         property.minValue = 0;
         property.maxValue = 101;
-        var editor:Group = createPropertyEditor(object, property);
+        var editor:PropertyEditor = createPropertyEditor(object, property);
         assertThat(editor, notNullValue());
         assertThat(editor.getElementAt(1), isA(HSlider));
         assertThat(editor.getElementAt(2), isA(Spinner));
@@ -51,7 +53,7 @@ public class CreatePropertyEditorTest {
     public function noSliderForNumberWithoutMaxValue():void {
         var object:Object = {};
         var property:Property = new Property("x", Number);
-        var editor:Group = createPropertyEditor(object, property);
+        var editor:PropertyEditor = createPropertyEditor(object, property);
         assertThat(editor, notNullValue());
         assertThat(editor.getElementAt(2), isA(Spinner));
     }
@@ -60,7 +62,7 @@ public class CreatePropertyEditorTest {
     public function colorPickerForUint():void {
         var object:Object = {};
         var property:Property = new Property("x", uint);
-        var editor:Group = createPropertyEditor(object, property);
+        var editor:PropertyEditor = createPropertyEditor(object, property);
         assertThat(editor, notNullValue());
         assertThat(editor.getElementAt(1), isA(ColorPicker));
     }
@@ -70,7 +72,7 @@ public class CreatePropertyEditorTest {
         var object:Object = {};
         var property:Property = new Property("x", Array);
         property.arrayType = GradientEntry;
-        var editor:Group = createPropertyEditor(object, property);
+        var editor:PropertyEditor = createPropertyEditor(object, property);
         assertThat(editor, notNullValue());
         // TODO: Improve this test.
     }
