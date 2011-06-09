@@ -8,6 +8,7 @@
         height="768"
         backgroundColor="#979797"
         applicationComplete="selectedShapeChanged(); selectedFilterChanged()"
+        title="Flexboxx"
         >
 
     <fx:Style>
