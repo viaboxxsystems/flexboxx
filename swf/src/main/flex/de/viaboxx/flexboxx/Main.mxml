@@ -20,6 +20,8 @@
     <fx:Script>
     <![CDATA[
 
+        import de.viaboxx.flexboxx.editors.SpinnerEditor;
+
         import mx.collections.ArrayList;
         import mx.core.UIComponent;
         import mx.graphics.SolidColor;
@@ -53,10 +55,19 @@
 
         // Common padding of elements 
         private const padding:int = 10;
+        
+        private static const DEFAULT_SHAPE_HEIGHT:int = 200;
+        private static const DEFAULT_SHAPE_WIDTH:int = 200;
 
+        /**
+         * @private
+         * Configures the given shape to some default values.
+         * @param shape The shape being configured
+         * @return The changed shape instance.
+         */
         private function initShape(shape:FilledElement):FilledElement {
-            shape.percentWidth = 50;
-            shape.percentHeight = 50;
+            shape.width = DEFAULT_SHAPE_WIDTH;
+            shape.height = DEFAULT_SHAPE_HEIGHT;
             shape.horizontalCenter = 0;
             shape.verticalCenter = 0;
             shape.fill = new SolidColor(0xFF0000);
@@ -121,7 +132,7 @@
                 return label;
             }
 
-            function addEditor(element:*, propertyData:Object):void {
+            function addEditor(element:*, propertyData:Object, editorClass:Class = null):void {
                 if (!element.hasOwnProperty(propertyData.name)) {
                     return;
                 }
@@ -133,13 +144,15 @@
                 if (propertyData.hasOwnProperty("maxValue")) {
                     property.maxValue = propertyData.maxValue;
                 }
-                shapeProperties.addElement(createPropertyEditor(element, property));
+                shapeProperties.addElement(createPropertyEditor(element, property, editorClass));
             }
 
             if (shapeCombobox.selectedIndex == -1) {
                 shapeCombobox.selectedIndex = 0;
             }
+
             shape = shapeCombobox.selectedItem;
+
             addFilterToShape();
             shapeGroup.removeAllElements();
             shapeGroup.addElement(shape);
@@ -152,8 +165,10 @@
             addEditor(shape.stroke, {name: "color", type: uint});
             addEditor(shape.stroke, {name: "weight", type: Number});
             shapeProperties.addElement(createLabel("shape"));
-            addEditor(shape, {name: "percentWidth", type: Number, minValue: 0, maxValue: 100});
-            addEditor(shape, {name: "percentHeight", type: Number, minValue: 0, maxValue: 100});
+
+            addEditor(shape, {name: "width", type: Number, minValue: 0, maxValue: 1000}, SpinnerEditor);
+            addEditor(shape, {name: "height", type: Number, minValue: 0, maxValue: 1000}, SpinnerEditor);
+
             addEditor(shape, {name: "alpha", type: Number, minValue: 0, maxValue: 1});
             addEditor(shape, {name: "radiusX", type: Number});
             addEditor(shape, {name: "radiusY", type: Number});
