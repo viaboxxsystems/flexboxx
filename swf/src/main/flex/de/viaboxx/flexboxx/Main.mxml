@@ -106,7 +106,7 @@
         }
 
         private function addFilterPropertyEditors():void {
-            FilterDescription.forFilter(filter).forEachProperty(function(property:FilterProperty):void {
+            FilterDescription.forFilter(filter).forEachProperty(function(property:Property):void {
                 var component:UIComponent = createPropertyEditor(filter, property);
                 if (component) {
                     filterProperties.addElement(component);
@@ -149,7 +149,7 @@
                     return;
                 }
 
-                var property:FilterProperty = new FilterProperty(propertyData.name, propertyData.type);
+                var property:Property = new Property(propertyData.name, propertyData.type);
                 if (propertyData.hasOwnProperty("minValue")) {
                     property.minValue = propertyData.minValue;
                 }

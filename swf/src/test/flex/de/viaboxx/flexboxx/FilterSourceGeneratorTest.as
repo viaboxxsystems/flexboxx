@@ -1,4 +1,4 @@
-package de.viaboxx.filterboxx {
+package de.viaboxx.flexboxx {
 import org.flexunit.assertThat;
 import org.hamcrest.object.equalTo;
 import org.hamcrest.text.endsWith;

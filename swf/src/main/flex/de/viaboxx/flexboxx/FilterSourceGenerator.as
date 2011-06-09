@@ -1,4 +1,4 @@
-package de.viaboxx.filterboxx {
+package de.viaboxx.flexboxx {
 import mx.filters.IBitmapFilter;
 import mx.formatters.NumberFormatter;
 import mx.graphics.GradientEntry;
@@ -16,7 +16,7 @@ public class FilterSourceGenerator {
         var filterDescription:FilterDescription = FilterDescription.forFilter(filter);
         var source:String = "<" + namespacePrefix + ":" + filterDescription.className;
         var fistAttribute:Boolean = true;
-        filterDescription.forEachProperty(function(property:FilterProperty):void {
+        filterDescription.forEachProperty(function(property:Property):void {
             if (fistAttribute) {
                 source += "\n";
                 fistAttribute = false;
@@ -27,7 +27,7 @@ public class FilterSourceGenerator {
         return source;
     }
 
-    private function format(value:*, property:FilterProperty):String {
+    private function format(value:*, property:Property):String {
         const dataType:Class = property.dataType;
         switch (dataType) {
             case Array:

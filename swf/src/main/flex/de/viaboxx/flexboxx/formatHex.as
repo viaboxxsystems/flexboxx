@@ -1,4 +1,4 @@
-package de.viaboxx.filterboxx {
+package de.viaboxx.flexboxx {
 import mx.utils.StringUtil;
 
 public function formatHex(color:uint):String {

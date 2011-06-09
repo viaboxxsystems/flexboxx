@@ -24,13 +24,13 @@
     -->
 
     <!-- The application identifier string, unique to this application. Required. -->
-    <id>Filterboxx</id>
+    <id>Flexboxx</id>
 
     <!-- Used as the filename for the application. Required. -->
-    <filename>Filterboxx</filename>
+    <filename>Flexboxx</filename>
 
     <!-- The name that is displayed in the AIR application installer. Optional. -->
-    <name>Filterboxx</name>
+    <name>Flexboxx</name>
 
     <!-- An application version designator (such as "v1", "2.5", or "Alpha 1"). Required. -->
     <version>1.0-SNAPSHOT</version>
@@ -57,7 +57,7 @@
         <content>${output}</content>
 
         <!-- The title of the main window. Optional. -->
-         <title>Filterboxx</title>
+         <title>Flexboxx</title>
 
         <!-- The type of system chrome to use (either "standard" or "none"). Optional. Default standard. -->
         <!-- set to none in production mode -->

@@ -1,4 +1,4 @@
-package de.viaboxx.filterboxx {
+package de.viaboxx.flexboxx {
 import flash.events.MouseEvent;
 
 import mx.binding.utils.BindingUtils;
@@ -16,7 +16,7 @@ import spark.components.Spinner;
 import spark.components.VGroup;
 import spark.primitives.Rect;
 
-public function createPropertyEditor(element:*, property:FilterProperty):Group {
+public function createPropertyEditor(element:*, property:Property):Group {
     var group:HGroup = new HGroup(),
             label:Label = new Label();
     group.gap = 5;

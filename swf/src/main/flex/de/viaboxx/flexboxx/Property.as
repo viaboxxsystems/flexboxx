@@ -1,12 +1,12 @@
-package de.viaboxx.filterboxx {
-public class FilterProperty {
+package de.viaboxx.flexboxx {
+public class Property {
     public var name:String;
     public var dataType:Class;
     public var minValue:Number;
     public var maxValue:Number;
     public var arrayType:Class;
 
-    public function FilterProperty(name:String, dataType:Class) {
+    public function Property(name:String, dataType:Class) {
         this.name = name;
         this.dataType = dataType;
     }

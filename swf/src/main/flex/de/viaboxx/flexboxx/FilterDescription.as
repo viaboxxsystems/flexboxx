@@ -1,4 +1,4 @@
-package de.viaboxx.filterboxx {
+package de.viaboxx.flexboxx {
 import flash.utils.Dictionary;
 import flash.utils.describeType;
 import flash.utils.getDefinitionByName;
@@ -50,7 +50,7 @@ public class FilterDescription {
         var accessor:XML,
                 propertyName:String,
                 typeName:String,
-                property:FilterProperty,
+                property:Property,
                 inspectable:XML,
                 filterType:String;
 
@@ -66,7 +66,7 @@ public class FilterDescription {
             propertyName = accessor.@name.toString();
             typeName = accessor.@type.toString();
 
-            property = new FilterProperty(propertyName, getDefinitionByName(typeName) as Class);
+            property = new Property(propertyName, getDefinitionByName(typeName) as Class);
             for each(inspectable in accessor.metadata.(@name == "Inspectable")) {
                 if (inspectable) {
                     property.minValue = setPropertyAttribute("minValue", inspectable);
@@ -84,18 +84,18 @@ public class FilterDescription {
         return descriptionForFilter;
     }
 
-    public function getProperty(propertyName:String):FilterProperty {
+    public function getProperty(propertyName:String):Property {
         return propertiesByName[propertyName];
     }
 
     public function forEachProperty(callForEachProperty:Function):void {
         // TODO fhd: Inefficient!
         var sortedProperties:Array = new Array();
-        var property:FilterProperty;
+        var property:Property;
         for each (property in propertiesByName) {
             sortedProperties.push(property);
         }
-        sortedProperties.sort(function(a:FilterProperty, b:FilterProperty):int {
+        sortedProperties.sort(function(a:Property, b:Property):int {
             if (a.name < b.name) {
                 return -1;
             }

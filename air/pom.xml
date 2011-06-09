@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.viaboxx</groupId>
-    <artifactId>filterboxx-air</artifactId>
+    <artifactId>flexboxx-air</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>air</packaging>
 
-    <name>Filterboxx Air app</name>
+    <name>Flexboxx Air App</name>
     <parent>
         <groupId>de.viaboxx</groupId>
-        <artifactId>filterboxx</artifactId>
+        <artifactId>flexboxx</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
@@ -47,7 +47,7 @@
 
         <dependency>
             <groupId>de.viaboxx</groupId>
-            <artifactId>filterboxx-swf</artifactId>
+            <artifactId>flexboxx-swf</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>swf</type>
         </dependency>

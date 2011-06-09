@@ -1,4 +1,4 @@
-package de.viaboxx.filterboxx {
+package de.viaboxx.flexboxx {
 import mx.controls.ColorPicker;
 import mx.graphics.GradientEntry;
 
@@ -19,7 +19,7 @@ public class CreatePropertyEditorTest {
     [Test]
     public function checkboxForBoolean():void {
         var object:Object = {};
-        var property:FilterProperty = new FilterProperty("x", Boolean);
+        var property:Property = new Property("x", Boolean);
         var editor:Group = createPropertyEditor(object, property);
         assertThat(editor, notNullValue());
         assertThat(editor.getElementAt(0), isA(CheckBox));
@@ -28,7 +28,7 @@ public class CreatePropertyEditorTest {
     [Test]
     public function sliderForNumberWithMaxValue():void {
         var object:Object = {};
-        var property:FilterProperty = new FilterProperty("n", Number);
+        var property:Property = new Property("n", Number);
         property.maxValue = 100;
         var editor:Group = createPropertyEditor(object, property);
         assertThat(editor, notNullValue());
@@ -38,7 +38,7 @@ public class CreatePropertyEditorTest {
     [Test]
     public function sliderAndSpinnerForNumberWithRangeGreater100():void {
         var object:Object = {};
-        var property:FilterProperty = new FilterProperty("n", Number);
+        var property:Property = new Property("n", Number);
         property.minValue = 0;
         property.maxValue = 101;
         var editor:Group = createPropertyEditor(object, property);
@@ -50,7 +50,7 @@ public class CreatePropertyEditorTest {
     [Test]
     public function noSliderForNumberWithoutMaxValue():void {
         var object:Object = {};
-        var property:FilterProperty = new FilterProperty("x", Number);
+        var property:Property = new Property("x", Number);
         var editor:Group = createPropertyEditor(object, property);
         assertThat(editor, notNullValue());
         assertThat(editor.getElementAt(2), isA(Spinner));
@@ -59,7 +59,7 @@ public class CreatePropertyEditorTest {
     [Test]
     public function colorPickerForUint():void {
         var object:Object = {};
-        var property:FilterProperty = new FilterProperty("x", uint);
+        var property:Property = new Property("x", uint);
         var editor:Group = createPropertyEditor(object, property);
         assertThat(editor, notNullValue());
         assertThat(editor.getElementAt(1), isA(ColorPicker));
@@ -68,7 +68,7 @@ public class CreatePropertyEditorTest {
     [Test]
     public function gradientEditorForGradientArrays():void {
         var object:Object = {};
-        var property:FilterProperty = new FilterProperty("x", Array);
+        var property:Property = new Property("x", Array);
         property.arrayType = GradientEntry;
         var editor:Group = createPropertyEditor(object, property);
         assertThat(editor, notNullValue());

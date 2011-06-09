@@ -1,4 +1,4 @@
-package de.viaboxx.filterboxx {
+package de.viaboxx.flexboxx {
 import mx.graphics.GradientEntry;
 
 import org.flexunit.assertThat;
@@ -50,7 +50,7 @@ public class FilterDescriptionTest {
     public function iteratingOverFilterDescriptionsWorks():void {
         var desc:FilterDescription = FilterDescription.forFilter(new TestFilter()),
                 properties:Array = [];
-        desc.forEachProperty(function callme(item:FilterProperty):void {
+        desc.forEachProperty(function callme(item:Property):void {
             properties.push(item.name);
         });
         assertThat(properties, array(equalTo("a"), equalTo("b"), equalTo("c")));
