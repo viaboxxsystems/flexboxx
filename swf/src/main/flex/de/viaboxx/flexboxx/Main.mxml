@@ -3,21 +3,29 @@
         xmlns:fx="http://ns.adobe.com/mxml/2009"
         xmlns:s="library://ns.adobe.com/flex/spark"
         xmlns:mx="library://ns.adobe.com/flex/mx"
-        showStatusBar="true"
+        showStatusBar="false"
         width="1024"
         height="768"
-        backgroundColor="#EDEDED"
+        backgroundColor="#979797"
         applicationComplete="selectedShapeChanged(); selectedFilterChanged()"
         >
+
+    <fx:Style>
+        @namespace
+        s
+        "library://ns.adobe.com/flex/spark"
+        ;
+    </fx:Style>
+
     <fx:Script>
     <![CDATA[
 
         import mx.collections.ArrayList;
         import mx.core.UIComponent;
         import mx.graphics.SolidColor;
-
         import mx.graphics.SolidColorStroke;
 
+        import spark.components.Label;
         import spark.filters.BevelFilter;
         import spark.filters.BlurFilter;
         import spark.filters.ColorMatrixFilter;
@@ -30,39 +38,6 @@
         import spark.primitives.Rect;
         import spark.primitives.supportClasses.FilledElement;
 
-        [Embed(source="../../../../resources/FuturaMediumBT.ttf",
-                fontName="FuturaEmbed",
-                fontStyle="normal",
-                fontWeight="normal",
-                mimeType="application/x-font",
-                embedAsCFF="true")]
-        private const Futura:Class;
-
-        [Embed(source="../../../../resources/FuturaMediumItalicBT.ttf",
-                fontName="FuturaEmbed",
-                fontStyle="italic",
-                fontWeight="normal",
-                mimeType="application/x-font",
-                embedAsCFF="true")]
-        private const FuturaItalic:Class;
-
-        [Embed(source="../../../../resources/FuturaBoldBT.ttf",
-                fontName="FuturaEmbed",
-                fontStyle="normal",
-                fontWeight="bold",
-                mimeType="application/x-font",
-                embedAsCFF="true")]
-        private const FuturaBold:Class;
-
-        [Embed(source="../../../../resources/FuturaBoldItalicBT.ttf",
-                fontName="FuturaEmbed",
-                fontStyle="italic",
-                fontWeight="bold",
-                mimeType="application/x-font",
-                embedAsCFF="true")]
-        private const FuturaItalicBold:Class;
-
-
         private var filterList:ArrayList = new ArrayList([
             new DropShadowFilter(),
             new GlowFilter(),
@@ -70,12 +45,14 @@
             new BlurFilter(),
             new ColorMatrixFilter(),
             new ConvolutionFilter(),
-            //            new DisplacementMapFilter(),
             new GradientBevelFilter(),
             new GradientGlowFilter(),
             new ShaderFilter()]);
 
         public var filter:IBitmapFilter = dropShadowFilter;
+
+        // Common padding of elements 
+        private const padding:int = 10;
 
         private function initShape(shape:FilledElement):FilledElement {
             shape.percentWidth = 50;
@@ -192,37 +169,89 @@
                 />
     </fx:Declarations>
 
-    <mx:HDividedBox
-            borderStyle="solid"
+    <s:HGroup
             width="100%"
             height="100%"
             >
-        <s:VGroup width="30%">
-            <s:VGroup>
-                <s:Label text="Filter"/>
-                <s:ComboBox id="filterCombobox" dataProvider="{filterList}" change="selectedFilterChanged()"/>
-                <s:VGroup id="filterProperties" width="100%"/>
-            </s:VGroup>
+        <s:Scroller
+                width="{editors.width + 2 * padding}"
+                height="100%"
+                >
+            <s:VGroup
+                    id="editors"
+                    width="200"
+                    gap="10"
+                    paddingLeft="{padding}"
+                    paddingTop="{padding}"
+                    >
 
-            <s:VGroup>
-                <s:Label text="Shape"/>
-                <s:ComboBox id="shapeCombobox" dataProvider="{shapeList}" change="selectedShapeChanged()"/>
-                <s:VGroup id="shapeProperties" width="100%"/>
+                <!--Filter editor-->
+                <s:Panel
+                        title="Filter"
+                        width="100%"
+                        >
+                    <s:VGroup
+                            paddingTop="{padding}"
+                            paddingLeft="{padding}"
+                            paddingBottom="{padding}"
+                            paddingRight="{padding}"
+                            >
+                        <s:ComboBox
+                                id="filterCombobox"
+                                dataProvider="{filterList}"
+                                change="selectedFilterChanged()"
+                                />
+                        <s:VGroup
+                                id="filterProperties"
+                                width="100%"
+                                />
+                    </s:VGroup>
+                </s:Panel>
+
+                <!--Shape editors-->
+                <s:Panel
+                        title="Shape"
+                        width="100%"
+                        >
+                    <s:VGroup
+                            paddingTop="{padding}"
+                            paddingLeft="{padding}"
+                            paddingBottom="{padding}"
+                            paddingRight="{padding}"
+                            >
+                        <s:ComboBox id="shapeCombobox" dataProvider="{shapeList}" change="selectedShapeChanged()"/>
+                        <s:VGroup id="shapeProperties" width="100%"/>
+                    </s:VGroup>
+                </s:Panel>
             </s:VGroup>
-        </s:VGroup>
-        <mx:VDividedBox width="70%" height="100%">
+        </s:Scroller>
+
+        <!-- Output -->
+        <mx:VDividedBox
+                width="100%"
+                height="100%"
+                liveDragging="true"
+                >
             <s:Group
                     id="shapeGroup"
                     width="100%"
-                    height="70%"
+                    height="100%"
                     >
             </s:Group>
-            <s:VGroup height="30%" width="100%">
-                <s:Button label="Generate Sources" click="{theSource.text = generateSources()}"/>
-                <s:TextArea id="theSource" editable="false" width="100%" height="100%"/>
+            <s:VGroup height="300" width="100%">
+                <s:Button
+                        label="Generate Sources"
+                        click="{theSource.text = generateSources()}"
+                        />
+                <s:TextArea
+                        id="theSource"
+                        editable="false"
+                        width="100%"
+                        height="100%"
+                        />
             </s:VGroup>
         </mx:VDividedBox>
-    </mx:HDividedBox>
+    </s:HGroup>
 
 
 </s:WindowedApplication>
