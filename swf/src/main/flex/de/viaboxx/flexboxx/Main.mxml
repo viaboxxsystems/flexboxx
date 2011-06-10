@@ -10,8 +10,6 @@
     <fx:Script>
     <![CDATA[
 
-        import de.viaboxx.flexboxx.*;
-        import de.viaboxx.flexboxx.*;
         import de.viaboxx.flexboxx.editors.SpinnerEditor;
 
         import mx.collections.ArrayList;
@@ -22,9 +20,7 @@
         import spark.components.Label;
         import spark.filters.BevelFilter;
         import spark.filters.BlurFilter;
-        import spark.filters.ColorMatrixFilter;
         import spark.filters.GlowFilter;
-        import spark.filters.ShaderFilter;
         import spark.primitives.Ellipse;
         import spark.primitives.Rect;
         import spark.primitives.supportClasses.FilledElement;
@@ -34,11 +30,12 @@
             new GlowFilter(),
             new BevelFilter(),
             new BlurFilter(),
-            new ColorMatrixFilter(),
+            //            new ColorMatrixFilter(),
             //            new ConvolutionFilter(),
             //            new GradientBevelFilter(),
             //            new GradientGlowFilter(),
-            new ShaderFilter()]);
+            //            new ShaderFilter();
+        ]);
 
         public var filter:IBitmapFilter = dropShadowFilter;
 
@@ -135,7 +132,7 @@
                 }
 
                 var property:Property = new Property(propertyData.name, propertyData.type);
-                if(propertyData.hasOwnProperty("displayName")){
+                if (propertyData.hasOwnProperty("displayName")) {
                     property.displayName = propertyData.displayName;
                 }
                 if (propertyData.hasOwnProperty("minValue")) {
