@@ -11,9 +11,9 @@ import org.hamcrest.object.notNullValue;
 import spark.components.CheckBox;
 import spark.components.Group;
 import spark.components.HSlider;
+import spark.components.Label;
 import spark.components.Spinner;
 
-[Ignore]
 public class CreatePropertyEditorTest {
     public function CreatePropertyEditorTest() {
         //empty constructor
@@ -21,51 +21,41 @@ public class CreatePropertyEditorTest {
 
     [Test]
     public function checkboxForBoolean():void {
-        var object:Object = {};
         var property:Property = new Property("x", Boolean);
-        var editor:PropertyEditor = createPropertyEditor(object, property);
-        assertThat(editor, notNullValue());
-        assertThat(editor.getElementAt(0), isA(CheckBox));
+        assertThat(contentOfEditor(property).getElementAt(0), isA(CheckBox));
+    }
+
+    private function contentOfEditor(property:Property):Group {
+        var editor:PropertyEditor = createPropertyEditor({}, property);
+        return editor.getElementAt(0) as Group;
     }
 
     [Test]
-    public function sliderForNumberWithMaxValue():void {
-        var object:Object = {};
+    public function sliderAndLabelForNumberWithMaxValue():void {
         var property:Property = new Property("n", Number);
-        property.maxValue = 100;
-        var editor:PropertyEditor = createPropertyEditor(object, property);
-        assertThat(editor, notNullValue());
-        assertThat(editor.getElementAt(1), isA(HSlider));
+        property.maxValue = 1;
+        assertThat(contentOfEditor(property).getElementAt(0), isA(HSlider));
+        assertThat(contentOfEditor(property).getElementAt(1), isA(Label));
     }
 
     [Test]
-    public function sliderAndSpinnerForNumberWithRangeGreater100():void {
-        var object:Object = {};
+    public function sliderAndSpinnerForNumberWithRangeGreater1():void {
         var property:Property = new Property("n", Number);
-        property.minValue = 0;
-        property.maxValue = 101;
-        var editor:PropertyEditor = createPropertyEditor(object, property);
-        assertThat(editor, notNullValue());
-        assertThat(editor.getElementAt(1), isA(HSlider));
-        assertThat(editor.getElementAt(2), isA(Spinner));
+        property.maxValue = 2;
+        assertThat(contentOfEditor(property).getElementAt(0), isA(HSlider));
+        assertThat(contentOfEditor(property).getElementAt(1), isA(Spinner));
     }
 
     [Test]
     public function noSliderForNumberWithoutMaxValue():void {
-        var object:Object = {};
         var property:Property = new Property("x", Number);
-        var editor:PropertyEditor = createPropertyEditor(object, property);
-        assertThat(editor, notNullValue());
-        assertThat(editor.getElementAt(2), isA(Spinner));
+        assertThat(contentOfEditor(property).getElementAt(0), isA(Spinner));
     }
 
     [Test]
     public function colorPickerForUint():void {
-        var object:Object = {};
         var property:Property = new Property("x", uint);
-        var editor:PropertyEditor = createPropertyEditor(object, property);
-        assertThat(editor, notNullValue());
-        assertThat(editor.getElementAt(1), isA(ColorPicker));
+        assertThat(contentOfEditor(property).getElementAt(0), isA(ColorPicker));
     }
 
     [Test]
