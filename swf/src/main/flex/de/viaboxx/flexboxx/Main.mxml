@@ -11,13 +11,6 @@
         title="Flexboxx"
         >
 
-    <fx:Style>
-        @namespace
-        s
-        "library://ns.adobe.com/flex/spark"
-        ;
-    </fx:Style>
-
     <fx:Script>
     <![CDATA[
 
