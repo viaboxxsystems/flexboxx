@@ -86,7 +86,6 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-
     </build>
 
     <dependencyManagement>
@@ -115,4 +114,17 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>flexmojos</id>
+            <url>http://repository.sonatype.org/content/groups/flexgroup/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>flexmojos</id>
+            <url>http://repository.sonatype.org/content/groups/flexgroup/</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
