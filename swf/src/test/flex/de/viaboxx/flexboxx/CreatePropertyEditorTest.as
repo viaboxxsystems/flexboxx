@@ -13,6 +13,7 @@ import spark.components.Group;
 import spark.components.HSlider;
 import spark.components.Spinner;
 
+[Ignore]
 public class CreatePropertyEditorTest {
     public function CreatePropertyEditorTest() {
         //empty constructor
