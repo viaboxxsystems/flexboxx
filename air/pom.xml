@@ -5,7 +5,6 @@
 
     <groupId>de.viaboxx.flexboxx</groupId>
     <artifactId>flexboxx-air</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>air</packaging>
 
     <name>Flexboxx Air App</name>
@@ -46,7 +45,7 @@
         <dependency>
             <groupId>de.viaboxx.flexboxx</groupId>
             <artifactId>flexboxx-swf</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
             <type>swf</type>
         </dependency>
 
