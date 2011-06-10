@@ -3,14 +3,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.viaboxx</groupId>
+    <groupId>de.viaboxx.flexboxx</groupId>
     <artifactId>flexboxx-air</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>air</packaging>
 
     <name>Flexboxx Air App</name>
+
     <parent>
-        <groupId>de.viaboxx</groupId>
+        <groupId>de.viaboxx.flexboxx</groupId>
         <artifactId>flexboxx</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -41,17 +42,14 @@
         </plugins>
     </build>
 
-
     <dependencies>
-
-
         <dependency>
-            <groupId>de.viaboxx</groupId>
+            <groupId>de.viaboxx.flexboxx</groupId>
             <artifactId>flexboxx-swf</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>swf</type>
         </dependency>
-                
+
         <dependency>
             <groupId>com.adobe.flex.framework</groupId>
             <artifactId>air-framework</artifactId>
@@ -68,6 +66,13 @@
         <dependency>
             <groupId>com.adobe.flexunit</groupId>
             <artifactId>flexunit</artifactId>
+            <type>swc</type>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>hamcrest-as3</groupId>
+            <artifactId>hamcrest-as3</artifactId>
             <type>swc</type>
             <scope>test</scope>
         </dependency>

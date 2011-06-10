@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:WindowedApplication
+<s:Application
         xmlns:fx="http://ns.adobe.com/mxml/2009"
         xmlns:s="library://ns.adobe.com/flex/spark"
         xmlns:mx="library://ns.adobe.com/flex/mx"
-        showStatusBar="false"
-        width="1024"
-        height="768"
         backgroundColor="#979797"
         applicationComplete="selectedShapeChanged(); selectedFilterChanged()"
-        title="Flexboxx"
         >
 
     <fx:Script>
     <![CDATA[
 
+        import de.viaboxx.flexboxx.*;
+        import de.viaboxx.flexboxx.*;
         import de.viaboxx.flexboxx.editors.SpinnerEditor;
 
         import mx.collections.ArrayList;
@@ -44,7 +42,7 @@
 
         public var filter:IBitmapFilter = dropShadowFilter;
 
-        // Common padding of elements 
+        // Common padding of elements
         private static const PADDING:int = 10;
         private static const LEFT_AREA_WIDTH:int = 210;
         private static const DEFAULT_SHAPE_HEIGHT:int = 200;
@@ -308,4 +306,4 @@
     </s:HGroup>
 
 
-</s:WindowedApplication>
+</s:Application>
