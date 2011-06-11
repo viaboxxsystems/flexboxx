@@ -118,6 +118,10 @@
             <id>flexmojos</id>
             <url>http://repository.sonatype.org/content/groups/flexgroup/</url>
         </repository>
+        <repository>
+            <id>flash-nexus-repository</id>
+            <url>http://www.flashnexus.org/nexus/content/groups/public</url>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
