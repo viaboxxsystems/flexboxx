@@ -160,8 +160,8 @@
             addEditor(shape.stroke, {name: "color", displayName:"Stroke color", type: uint});
             addEditor(shape.stroke, {name: "weight", displayName:"Stroke weight", type: Number});
 
-            addEditor(shape, {name: "width", type: Number, minValue: 0, maxValue: 1000}, SpinnerEditor);
-            addEditor(shape, {name: "height", type: Number, minValue: 0, maxValue: 1000}, SpinnerEditor);
+            addEditor(shape, {name: "width", type: Number, minValue: 0}, SpinnerEditor);
+            addEditor(shape, {name: "height", type: Number, minValue: 0}, SpinnerEditor);
 
             addEditor(shape, {name: "alpha", type: Number, minValue: 0, maxValue: 1});
             addEditor(shape, {name: "radiusX", type: Number});
