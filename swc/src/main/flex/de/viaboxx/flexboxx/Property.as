@@ -4,7 +4,7 @@ public class Property {
     public var displayName:String;
     public var dataType:Class;
     public var minValue:Number = 0;
-    public var maxValue:Number = 0;
+    public var maxValue:Number;
     public var arrayType:Class;
 
     public function Property(name:String, dataType:Class) {
