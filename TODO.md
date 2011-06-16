@@ -4,3 +4,4 @@
 * Generate sources continuously
 * Add a copy button for the generated source
 * Turn property names into links to the Flex documentation
+* Add an application icon and window decorations to the Air application.
