@@ -1,3 +1,4 @@
+* Add optional ID property for generated filter code
 * Add logo/name to the UI
 * Make it possible to modify the background (color, alpha)
 * Make it possible to rotate the shape
