@@ -3,6 +3,8 @@ Flexboxx
 
 WYSIWYG filter creation for Flex.
 
+With Flexboxx you can modify a shape and a filter applied to it, and generate the source code for the filter.
+
 License
 -------
 
