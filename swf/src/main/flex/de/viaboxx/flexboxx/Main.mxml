@@ -172,6 +172,10 @@
             return typeName.substr(typeName.lastIndexOf(":") + 1);
         }
 
+        private function copySourceToClipboard():void {
+            System.setClipboard(theSource.text);
+        }
+
         ]]>
         </fx:Script>
 
@@ -273,13 +277,14 @@
                         title="Filter Source Code"
                         >
                     <s:layout>
-                        <s:VerticalLayout/>
+                        <s:VerticalLayout
+                                horizontalAlign="center"
+                                />
                     </s:layout>
-                    <s:HGroup
-                            horizontalAlign="right"
-                            width="100%"
-                            >
-                    </s:HGroup>
+                    <s:Button
+                        label="Copy to Clipboard"
+                        click="copySourceToClipboard()"
+                        />
                     <s:TextArea
                             id="theSource"
                             editable="false"
