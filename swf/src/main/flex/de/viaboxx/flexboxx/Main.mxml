@@ -25,6 +25,14 @@
         import spark.primitives.Rect;
         import spark.primitives.supportClasses.FilledElement;
 
+        // Common padding of elements
+        private static const PADDING:int = 10;
+        private static const LEFT_AREA_WIDTH:int = 210;
+        private static const DEFAULT_SHAPE_HEIGHT:int = 200;
+        private static const DEFAULT_SHAPE_WIDTH:int = 200;
+
+        private static const sourceGenerator:FilterSourceGenerator = new FilterSourceGenerator();
+
         private var filterList:ArrayList = new ArrayList([
             new DropShadowFilter(),
             new GlowFilter(),
@@ -37,14 +45,7 @@
             //            new ShaderFilter();
         ]);
 
-        public var filter:IBitmapFilter = dropShadowFilter;
-
-        // Common padding of elements
-        private static const PADDING:int = 10;
-        private static const LEFT_AREA_WIDTH:int = 210;
-        private static const DEFAULT_SHAPE_HEIGHT:int = 200;
-        private static const DEFAULT_SHAPE_WIDTH:int = 200;
-        private static const INITIAL_SOURCES_GROUP_HEIGHT:int = 300;
+        private var filter:IBitmapFilter = dropShadowFilter;
 
         /**
          * @private
@@ -67,32 +68,28 @@
             initShape(new Ellipse())
         ]);
 
-        public var shape:FilledElement;
+        private var shape:FilledElement;
 
-        private static const sourceGenerator:FilterSourceGenerator = new FilterSourceGenerator();
-
-        private function generateSources():String {
-            if (filter) {
-                return sourceGenerator.sourceForFilter(filter);
-            } else {
-                return "NO FILTER SELECTED";
-            }
-
-        }
+        private var timeoutId:uint;
 
         private function updateSources():void {
-            theSource.text = generateSources();
-            if (sourceGroup.height < 50) {
-                sourceGroup.height = INITIAL_SOURCES_GROUP_HEIGHT;
-            }
+            theSource.text = sourceGenerator.sourceForFilter(filter);
+        }
+
+        private function scheduleSourcesUpdate():void {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(function():void {
+                updateSources();
+            }, 100);
         }
 
         private function addFilterPropertyEditors():void {
             FilterDescription.forFilter(filter).forEachProperty(function(property:Property):void {
-                var component:UIComponent = createPropertyEditor(filter, property);
-                if (component) {
+                var component:UIComponent = createPropertyEditor(filter, property, function(e:Event):void {
+                    scheduleSourcesUpdate();
+                });
+                if (component)
                     filterProperties.addElement(component);
-                }
             });
         }
 
@@ -105,6 +102,7 @@
             clearFilterPropertyEditors();
             addFilterPropertyEditors();
             addFilterToShape();
+            updateSources();
         }
 
         private function clearFilterPropertyEditors():void {
@@ -141,7 +139,7 @@
                 if (propertyData.hasOwnProperty("maxValue")) {
                     property.maxValue = propertyData.maxValue;
                 }
-                shapeProperties.addElement(createPropertyEditor(element, property, editorClass));
+                shapeProperties.addElement(createPropertyEditor(element, property, null, editorClass));
             }
 
             if (shapeCombobox.selectedIndex == -1) {
@@ -169,7 +167,7 @@
         }
 
 
-        function classNameLabel(item:*):String {
+        private function classNameLabel(item:*):String {
             var typeName:String = describeType(item).@name;
             return typeName.substr(typeName.lastIndexOf(":") + 1);
         }
@@ -223,14 +221,6 @@
                             id="filterProperties"
                             width="100%"
                             />
-                    <s:Group width="100%">
-                        <s:Button
-                                top="10"
-                                horizontalCenter="0"
-                                label="Generate Sources"
-                                click="updateSources()"
-                                />
-                    </s:Group>
                 </s:Panel>
 
                 <!--Shape editors-->
@@ -273,7 +263,7 @@
             <s:VGroup
                     id="sourceGroup"
                     width="100%"
-                    height="0"
+                    height="300"
                     paddingBottom="{PADDING}"
                     paddingRight="{PADDING}"
                     >

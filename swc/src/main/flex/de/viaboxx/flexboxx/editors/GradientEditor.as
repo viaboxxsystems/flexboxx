@@ -16,7 +16,7 @@ import spark.components.VGroup;
 import spark.primitives.Rect;
 
 public class GradientEditor extends PropertyEditor {
-    public function GradientEditor(element:*, property:Property) {
+    public function GradientEditor(element:*, property:Property, changeHandler:Function = null) {
         var label:Label = new Label();
         label.text = property.name;
         var overviewRect:Rect = new Rect();

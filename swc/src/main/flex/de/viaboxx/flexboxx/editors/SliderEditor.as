@@ -9,10 +9,10 @@ import spark.components.NumericStepper;
 import spark.layouts.HorizontalLayout;
 
 public class SliderEditor extends LabeledEditor {
-    public function SliderEditor(element:*, property:Property) {
+    public function SliderEditor(element:*, property:Property, changeHandler:Function = null) {
         super(property.displayName);
         //setupLayout();
-        var slider:HSlider = addSlider(property, element);
+        var slider:HSlider = addSlider(property, element, changeHandler);
         if (property.maxValue - property.minValue > 1) {
             addStepper(property, slider);
         } else {
@@ -42,16 +42,14 @@ public class SliderEditor extends LabeledEditor {
         content.addElement(stepper);
     }
 
-    private function addSlider(property:Property, element:*):HSlider {
+    private function addSlider(property:Property, element:*, changeHandler:Function = null):HSlider {
         var slider:HSlider = new HSlider();
         slider.minimum = property.minValue;
         slider.maximum = property.maxValue;
         slider.stepSize = 0.01;
-        slider.value = element[property.name];
         slider.left = 0;
         slider.verticalCenter = 0;
-
-        BindingUtils.bindProperty(element, property.name, slider, "value");
+        bindProperty(element, property.name, slider, "value", changeHandler);
         content.addElement(slider);
         return slider;
     }
