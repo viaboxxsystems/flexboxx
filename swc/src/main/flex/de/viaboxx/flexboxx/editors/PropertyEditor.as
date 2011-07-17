@@ -20,7 +20,7 @@ public class PropertyEditor extends Group {
         addElement(rect);
     }
 
-    protected function bindProperty(element, elementProperty, editor, editorProperty,
+    protected function bindProperty(element:*, elementProperty:String, editor:*, editorProperty:String,
                                     changeHandler:Function = null):void {
         editor[editorProperty] = element[elementProperty];
         BindingUtils.bindProperty(element, elementProperty, editor, editorProperty);

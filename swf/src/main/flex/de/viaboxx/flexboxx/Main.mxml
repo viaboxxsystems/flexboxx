@@ -23,6 +23,9 @@
         import spark.filters.GlowFilter;
         import spark.primitives.Ellipse;
         import spark.primitives.Rect;
+
+        //        import spark.primitives.RectangularDropShadow;
+
         import spark.primitives.supportClasses.FilledElement;
 
         // Common padding of elements
@@ -35,9 +38,10 @@
 
         private var filterList:ArrayList = new ArrayList([
             new DropShadowFilter(),
+            //            new RectangularDropShadow(),
             new GlowFilter(),
             new BevelFilter(),
-            new BlurFilter(),
+            new BlurFilter()
             //            new ColorMatrixFilter(),
             //            new ConvolutionFilter(),
             //            new GradientBevelFilter(),
@@ -209,6 +213,7 @@
 
                 <!--Filter editor-->
                 <s:Panel
+                        skinClass="de.viaboxx.flexboxx.skins.TopControlBarPanelSkin"
                         title="Filter"
                         width="100%"
                         >
@@ -220,12 +225,29 @@
                                 paddingRight="{PADDING}"
                                 />
                     </s:layout>
-                    <s:ComboBox
-                            id="filterCombobox"
-                            labelFunction="classNameLabel"
-                            dataProvider="{filterList}"
-                            change="selectedFilterChanged()"
-                            />
+                    <s:controlBarLayout>
+                        <s:HorizontalLayout
+                                gap="5"
+                                paddingLeft="5"
+                                paddingTop="5"
+                                paddingBottom="5"
+                                />
+                    </s:controlBarLayout>
+                    <s:controlBarContent>
+                        <s:Label
+                                text="Filter:"
+                                height="100%"
+                                verticalAlign="middle"
+                                />
+                        <s:ComboBox
+                                id="filterCombobox"
+                                verticalCenter="0"
+                                labelFunction="classNameLabel"
+                                dataProvider="{filterList}"
+                                change="selectedFilterChanged()"
+                                />
+                    </s:controlBarContent>
+
                     <s:VGroup
                             id="filterProperties"
                             width="100%"
@@ -234,6 +256,7 @@
 
                 <!--Shape editors-->
                 <s:Panel
+                        skinClass="de.viaboxx.flexboxx.skins.TopControlBarPanelSkin"
                         title="Shape"
                         width="100%"
                         >
@@ -245,12 +268,27 @@
                                 paddingRight="{PADDING}"
                                 />
                     </s:layout>
-                    <s:ComboBox
-                            id="shapeCombobox"
-                            dataProvider="{shapeList}"
-                            labelFunction="classNameLabel"
-                            change="selectedShapeChanged()"
-                            />
+                    <s:controlBarLayout>
+                        <s:HorizontalLayout
+                                paddingLeft="5"
+                                paddingTop="5"
+                                paddingBottom="5"
+                                gap="5"
+                                />
+                    </s:controlBarLayout>
+                    <s:controlBarContent>
+                        <s:Label text="Shape:"
+                                 height="100%"
+                                 verticalAlign="middle"
+                                />
+                        <s:ComboBox
+                                id="shapeCombobox"
+                                dataProvider="{shapeList}"
+                                labelFunction="classNameLabel"
+                                change="selectedShapeChanged()"
+                                />
+                    </s:controlBarContent>
+
                     <s:VGroup
                             id="shapeProperties" width="100%"/>
                 </s:Panel>
@@ -314,16 +352,32 @@
                         width="100%"
                         height="100%"
                         title="Filter Source Code"
+                        skinClass="de.viaboxx.flexboxx.skins.TopControlBarPanelSkin"
                         >
                     <s:layout>
                         <s:VerticalLayout
                                 horizontalAlign="center"
                                 />
                     </s:layout>
-                    <s:Button
-                            label="Copy to Clipboard"
-                            click="copySourceToClipboard()"
-                            />
+                    <s:controlBarLayout>
+                        <s:HorizontalLayout
+                                gap="5"
+                                paddingTop="5"
+                                paddingLeft="5"
+                                paddingBottom="5"
+                                />
+                    </s:controlBarLayout>
+                    <s:controlBarContent>
+                        <s:Label
+                                text="Filter Source Code:"
+                                height="100%"
+                                verticalAlign="middle"/>
+                        <s:Button
+                                label="Copy to Clipboard"
+                                click="copySourceToClipboard()"
+                                />
+
+                    </s:controlBarContent>
                     <s:TextArea
                             id="theSource"
                             editable="false"
