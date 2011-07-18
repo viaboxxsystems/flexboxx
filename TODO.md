@@ -4,3 +4,4 @@
 * Texts as shapes
 * Put the combo boxes for filter and shape and the "Copy to Clipboard"
   button in the title bar of each respective panel.
+* Add Support for not IBitmapFilter-based Filters like spark.primitives.RectangularDropShadow
