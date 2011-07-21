@@ -7,7 +7,7 @@ import mx.filters.IBitmapFilter;
 
 public class FilterDescription {
 
-    public var filter:IBitmapFilter;
+    public var filter:*;
     private const propertiesByName:Dictionary = new Dictionary();
 
     public var className:String;
@@ -46,7 +46,7 @@ public class FilterDescription {
         return null;
     }
 
-    private function analyzeFilter(filter:IBitmapFilter):void {
+    private function analyzeFilter(filter:*):void {
         var accessor:XML,
                 propertyName:String,
                 typeName:String,
@@ -62,7 +62,11 @@ public class FilterDescription {
         } else {
             className = filterType;
         }
+        //TODO refactor this to 
         for each (accessor in description.accessor) {
+            if(accessor.@access != "readwrite"){
+                continue;
+            }
             propertyName = accessor.@name.toString();
             typeName = accessor.@type.toString();
 

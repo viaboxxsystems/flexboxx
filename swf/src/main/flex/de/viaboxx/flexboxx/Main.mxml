@@ -23,6 +23,7 @@
         import spark.filters.GlowFilter;
         import spark.primitives.Ellipse;
         import spark.primitives.Rect;
+        import spark.primitives.RectangularDropShadow;
 
         //        import spark.primitives.RectangularDropShadow;
 
@@ -41,7 +42,6 @@
 
         private var filterList:ArrayList = new ArrayList([
             new DropShadowFilter(),
-            //            new RectangularDropShadow(),
             new GlowFilter(),
             new BevelFilter(),
             new BlurFilter()
@@ -52,7 +52,7 @@
             //            new ShaderFilter();
         ]);
 
-        private var filter:IBitmapFilter = dropShadowFilter;
+        private var filter:* = dropShadowFilter;
 
         /**
          * @private
