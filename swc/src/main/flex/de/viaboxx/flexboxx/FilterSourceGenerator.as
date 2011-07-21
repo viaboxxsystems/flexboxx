@@ -2,6 +2,7 @@ package de.viaboxx.flexboxx {
 import mx.filters.IBitmapFilter;
 import mx.formatters.NumberFormatter;
 import mx.graphics.GradientEntry;
+import mx.utils.StringUtil;
 
 public class FilterSourceGenerator {
     private var formatter:NumberFormatter;
@@ -12,9 +13,12 @@ public class FilterSourceGenerator {
         formatter.precision = 2;
     }
 
-    public function sourceForFilter(filter:IBitmapFilter, namespacePrefix:String = "s"):String {
+    public function sourceForFilter(filter:*, id:String=null, namespacePrefix:String = "s"):String {
         var filterDescription:FilterDescription = FilterDescription.forFilter(filter);
         var source:String = "<" + namespacePrefix + ":" + filterDescription.className;
+        if(id){
+            source+=StringUtil.substitute('\nid="{0}"',id);
+        }
         var fistAttribute:Boolean = true;
         filterDescription.forEachProperty(function(property:Property):void {
             if (fistAttribute) {
@@ -26,6 +30,7 @@ public class FilterSourceGenerator {
         source += "/>";
         return source;
     }
+
 
     private function format(value:*, property:Property):String {
         const dataType:Class = property.dataType;

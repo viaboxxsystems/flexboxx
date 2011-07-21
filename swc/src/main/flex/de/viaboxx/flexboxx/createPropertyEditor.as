@@ -6,6 +6,8 @@ import de.viaboxx.flexboxx.editors.PropertyEditor;
 import de.viaboxx.flexboxx.editors.SliderEditor;
 import de.viaboxx.flexboxx.editors.SpinnerEditor;
 
+import de.viaboxx.flexboxx.editors.StringEditor;
+
 import flash.events.Event;
 
 import mx.binding.utils.ChangeWatcher;
@@ -25,6 +27,8 @@ public function createPropertyEditor(element:*, property:Property, changeHandler
 
     function editorForProperty(property:Property):Class {
         switch (property.dataType) {
+            case String:
+                return StringEditor;
             case Boolean:
                 return CheckBoxEditor;
             case int:

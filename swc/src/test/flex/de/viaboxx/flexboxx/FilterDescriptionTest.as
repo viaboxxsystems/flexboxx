@@ -93,6 +93,15 @@ public class FilterDescriptionTest {
         var desc:FilterDescription = FilterDescription.forFilter(new TestGradientEntryFilter());
         assertThat(desc.getProperty("entries").arrayType, equalTo(GradientEntry));
     }
+
+    [Test]
+    public function addingPropertiesManuallyWorks():void {
+        var desc:FilterDescription = FilterDescription.forFilter(new TestFilter());
+        var property:Property = new Property("id",String);
+        desc.addProperty(property);
+        assertThat(desc.getProperty("id"),equalTo(property));
+    }
+
 }
 }
 

@@ -78,7 +78,7 @@ public class FilterDescription {
         }
     }
 
-    public static function forFilter(filter:IBitmapFilter):FilterDescription {
+    public static function forFilter(filter:*):FilterDescription {
         var descriptionForFilter:FilterDescription = new FilterDescription();
         descriptionForFilter.analyzeFilter(filter);
         return descriptionForFilter;
@@ -107,6 +107,10 @@ public class FilterDescription {
         for each (property in sortedProperties) {
             callForEachProperty(property);
         }
+    }
+
+    public function addProperty(property:Property):void {
+        propertiesByName[property.name] = property;
     }
 }
 

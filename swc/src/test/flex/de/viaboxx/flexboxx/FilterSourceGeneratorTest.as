@@ -1,6 +1,7 @@
 package de.viaboxx.flexboxx {
 import org.flexunit.assertThat;
 import org.hamcrest.object.equalTo;
+import org.hamcrest.text.containsString;
 import org.hamcrest.text.endsWith;
 import org.hamcrest.text.startsWith;
 
@@ -44,8 +45,14 @@ public class FilterSourceGeneratorTest extends FilterSourceGenerator {
 
     [Test]
     public function namespacePrefixIsCustomizable():void {
-        assertThat(sourceForFilter(new IntTestFilter(), "asd"), startsWith("<asd:"));
+        assertThat(sourceForFilter(new IntTestFilter(), null, "asd"), startsWith("<asd:"));
     }
+
+    [Test]
+    public function idIsAddedIfSet():void {
+        assertThat(sourceForFilter(new IntTestFilter(),"theid"), containsString('id="theid"'));
+    }
+
 
 }
 }

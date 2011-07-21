@@ -28,6 +28,9 @@
 
         import spark.primitives.supportClasses.FilledElement;
 
+
+        public var filterId:String;
+
         // Common padding of elements
         private static const PADDING:int = 10;
         private static const LEFT_AREA_WIDTH:int = 210;
@@ -77,7 +80,7 @@
         private var timeoutId:uint;
 
         private function updateSources():void {
-            theSource.text = sourceGenerator.sourceForFilter(filter);
+            theSource.text = sourceGenerator.sourceForFilter(filter,filterId);
         }
 
         private function scheduleSourcesUpdate():void {
@@ -88,7 +91,9 @@
         }
 
         private function addFilterPropertyEditors():void {
-            FilterDescription.forFilter(filter).forEachProperty(function(property:Property):void {
+            var filterDescription:FilterDescription = FilterDescription.forFilter(filter);
+            addIdProperty();
+            filterDescription.forEachProperty(function(property:Property):void {
                 var component:UIComponent = createPropertyEditor(filter, property, function(e:Event):void {
                     scheduleSourcesUpdate();
                 });
@@ -183,6 +188,15 @@
 
         private function copySourceToClipboard():void {
             System.setClipboard(theSource.text);
+        }
+
+        private function addIdProperty():void {
+            var idProperty:Property = new Property("filterId", String);
+            idProperty.displayName = "id";
+
+            filterProperties.addElement(createPropertyEditor(this, idProperty, function(e:Event):void {
+                scheduleSourcesUpdate();
+            }));
         }
 
         ]]>
