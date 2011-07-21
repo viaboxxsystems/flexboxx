@@ -6,6 +6,8 @@ import org.hamcrest.collection.array;
 import org.hamcrest.object.equalTo;
 import org.hamcrest.object.notNullValue;
 
+import org.hamcrest.object.nullValue;
+
 import spark.filters.DropShadowFilter;
 
 [RunWith("org.flexunit.runners.Parameterized")]
@@ -97,9 +99,21 @@ public class FilterDescriptionTest {
     [Test]
     public function addingPropertiesManuallyWorks():void {
         var desc:FilterDescription = FilterDescription.forFilter(new TestFilter());
-        var property:Property = new Property("id",String);
+        var property:Property = new Property("id", String);
         desc.addProperty(property);
-        assertThat(desc.getProperty("id"),equalTo(property));
+        assertThat(desc.getProperty("id"), equalTo(property));
+    }
+
+    [Test]
+    public function readOnlyPropertiesAreOmitted():void {
+        var desc:FilterDescription = FilterDescription.forFilter(new TestReadOnlyProperty());
+        assertThat(desc.getProperty("automationEnabled"), nullValue());
+    }
+
+    [Test]
+    public function writeOnlyPropertiesAreOmitted():void {
+        var desc:FilterDescription = FilterDescription.forFilter(new TestWriteOnlyProperty());
+        assertThat(desc.getProperty("writeOnly"), nullValue());
     }
 
 }
@@ -118,14 +132,24 @@ class TestFilter implements IBitmapFilter {
         return _a;
     }
 
+
+    public function set a(a:int) {
+    }
+
     public function get c():Boolean {
         return _c;
+    }
+
+    public function set c(c:Boolean) {
     }
 
     [Inspectable(minValue="0.1", maxValue="1.0")]
     [Inspectable]
     public function get b():Number {
         return _b;
+    }
+
+    public function set b(b:Number) {
     }
 
     public function clone():BitmapFilter {
@@ -143,8 +167,28 @@ class TestGradientEntryFilter implements IBitmapFilter {
         return _entries;
     }
 
+
+    public function set entries(arr:Array):void {
+    }
+
     public function clone():BitmapFilter {
         return null;
+    }
+}
+
+class TestReadOnlyProperty {
+
+    // r/o property for testing purposes.
+    public function get automationEnabled():Boolean {
+        return true;
+    }
+}
+
+class TestWriteOnlyProperty {
+
+    // w/o property for testing purposes.
+    public function set writeOnly(a:Boolean):void {
+
     }
 }
 

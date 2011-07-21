@@ -1,5 +1,4 @@
 package de.viaboxx.flexboxx {
-import mx.filters.IBitmapFilter;
 import mx.formatters.NumberFormatter;
 import mx.graphics.GradientEntry;
 import mx.utils.StringUtil;
@@ -58,7 +57,7 @@ public class FilterSourceGenerator {
             case uint:
                 return formatHex(value);
             default:
-                return value.toString();
+                return value==null? "null": value.toString();
         }
     }
 }
